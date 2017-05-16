@@ -1,0 +1,582 @@
+*{
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+	
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body{
+	font-family: "microsoft yahei";
+	background-color: rgba(255, 255, 255, 1);
+}
+
+/*轮播 start*/
+.dotcontrol{
+	display: table;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    margin-left: -24px;
+}
+.dotcontrol span{
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 0);
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	margin: 5px;
+}
+.dotcontrol span.active{
+	background: rgba(255, 255, 255, 1);
+}
+/*轮播 end*/
+.toast{
+	background-color: rgba(0, 0, 0, 0.4);
+    width: 250px;
+    display: none;
+    position: absolute;
+    top: 20%;
+    z-index: 3;
+    left: 50%;
+    margin-left: -125px;
+    color: rgba(255, 255, 255, 0.65);
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/*content start*/
+.content{
+	width: 100%;
+	display: table;
+	margin: 0 auto;
+}
+.classify_title_container{
+	width: 100%;
+	display: table;
+	margin: 0 auto;
+	background-color: #efeff4;
+}
+.classify_title_item{
+	float: left;
+	width: 25%;
+	display: table;
+}
+.icon{
+    width: 32px;
+    height: 32px;
+    fill:rgba(135, 135, 135, 1);
+}
+.icon_meishi,
+.icon_shicai,
+.icon_shipu,
+.icon_all,
+.icon_home,
+.icon_recommend,
+.icon_community,
+.icon_user{
+    display: block;
+	margin-top: 6px;
+    margin: 0 auto;
+}
+.classify_title_item h4{
+	text-align: center;
+	font-weight: 400;
+	line-height: 1.6;
+	color: rgba(135, 135, 135, 1);
+}
+.classify_title_item.active .icon,
+.classify_title_item.active h4{
+    fill:rgba(255, 100, 100, 1);
+	color: rgba(255, 100, 100, 1);
+}
+
+.list_container{
+	padding: 3px 15px 0px 15px;
+	background-color: rgba(245, 245, 245 ,1);
+}
+.order_methor{
+	display: table;
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 15px;
+    padding: 5px 12px;
+}
+.order_methor span{
+	color: rgba(255, 100, 100, 1);
+	padding-right: 12px;
+	border-right: 1px solid rgba(255, 100, 100, 1);
+}
+.order_methor a{
+	margin-left: 12px;
+	color: rgba(255, 100, 100, 1);
+}
+/*排序方式弹出菜单文字居中*/
+.mui-table-view-cell>a:not(.mui-btn) {
+	text-align: center;
+}
+/*排序方式菜单宽度*/
+.mui-popover {
+	width: 100px;
+}
+/*弹出菜单列表分割线*/
+.mui-table-view-cell:after {
+	right: 15px;
+}
+.order_methor a[href="#orderMethor"]:after{
+	content: "";
+	display: inline-block;
+    width: 0px;
+    height: 0px;
+    border-top: 5px solid rgba(255, 100, 100, 1);
+    border-right: 5px solid rgba(255, 100, 100, 0);
+    border-left: 5px solid rgba(255, 100, 100, 0);
+    vertical-align: 3px;
+    margin-left: 7px;
+}
+.list_item_ul{
+	width: 100%;
+	display: table;
+}
+.list_item_ul li{
+	width: 100%;
+    display: table;
+    position: relative;
+    padding: 4px 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.introduce{
+	margin-left: 70px;
+}
+.thumbnail{
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	overflow: hidden;
+	float: left;
+	margin-top: 14px;
+}
+.thumbnail img{
+	width: 100%;
+	height: auto;
+}
+.list_item_ul li h2{
+	font-weight: 400;
+    color: rgba(92, 92, 92, 1);
+    font-size: 16px;
+}
+.list_item_ul li p{
+	font-size: 12px;
+	margin-bottom: 0px;
+}
+.list_item_ul li h3{
+	font-size: 14px;
+	font-weight: 400;
+	color: rgba(255, 100, 100, 1);
+	display: inline-block;
+}
+.list_item_ul li h3 span{
+	font-size: 28px;
+}
+.list_item_ul li h4{
+	font-weight: 400;
+    font-size: 14px;
+    display: inline-block;
+    margin-left: 20px;
+    background-color: rgba(253, 220, 140, 1);
+    color: rgba(255, 100, 100, 1);
+    padding: 4px 15px;
+    border-radius: 15px;
+}
+.score{
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	color: rgba(255, 100, 100, 1);
+}
+/*content end*/
+
+/*底部菜单 start*/
+.mui-bar{
+	box-shadow: none;
+}
+.mui-tab-item .icon{
+	width: 25px;
+    height: 25px;
+    fill: rgba(135, 135, 135, 1);
+}
+.mui-active .mui-tab-label,
+.mui-active .icon{
+	fill:rgba(255, 100, 100, 1);
+	color: rgba(255, 100, 100, 1);
+}
+/*底部菜单 end*/
+
+/*详情 start*/
+.detail,
+.check,
+.selectAdress,
+.add_address,
+.selectPayMethod{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	z-index: 11;
+	top: 0px;
+    left: 0px;
+    background-color: rgb(255, 255, 255);
+    display: none;
+}
+.closeDetailPannel,
+.share{
+	position: absolute;
+	top: 5px;
+}
+.closeDetailPannel{
+	left: 5px;
+}
+.share{
+	right: 5px;
+}
+.icon_left,
+.icon_share,
+.icon_right{
+	width: 22px;
+	height: 22px;
+	fill:rgba(255, 100, 100, 1);
+	vertical-align: -5px;
+}
+.foodImg{
+	width: 100%;
+	max-height: 120px;
+	overflow: hidden;
+}
+.foodImg img{
+	display: block;
+	height: auto;
+	width: 100%;
+}
+.detail_content{
+	padding: 0px 10px;
+	padding-top: 15px;
+}
+.detail h2{
+	font-size: 20px;
+	color: rgba(92, 92, 92, 1);
+}
+.price{
+	display: inline-block;
+	color: rgba(255, 100, 100, 1);
+	padding-top: 10px;
+}
+.detail h3{
+	color: rgba(92, 92, 92, 1);
+	font-size: 16px;
+	margin-top: 15px;
+	margin-top: 20px;
+}
+.mui-numbox{
+	margin-top: 10px;
+}
+.detail_content h5{
+	font-weight: 400;
+	color:rgba(92, 92, 92, 1);
+	font-size: 14px;
+	margin-top: 15px;
+	border-left: 2px solid rgb(255, 100, 87);
+	padding-left: 10px;
+	line-height: 14px;
+}
+.detail_content p{
+	font-size: 14px;
+	margin-top: 5px;
+	text-indent: 13px;
+}
+.cart{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 60px;
+	background-color: rgb(51, 51, 51);
+}
+.settlement{
+	background-color: rgb(253, 220, 140) !important;
+}
+.icon_cart{
+	position: absolute;
+	top: -16px;
+	padding: 5px;
+	left: 5px;
+	border-radius: 50%;
+	fill:rgba(255, 100, 100, 1);
+	background-color: rgba(253, 220, 140, 1);
+}
+.cart h4{
+	display: inline-block;
+	width: 60%;
+	background-color: rgb(60, 60, 60);
+	height: 100%;
+	color: rgba(255, 100, 100, 1);
+	font-weight: 400;
+	padding-left: 50px;
+	margin-top: 0px;
+	line-height: 60px;
+}
+.cart h4 span{
+	font-weight: 800;
+}
+.cart a{
+	display: inline-block;
+    text-align: center;
+    width: 40%;
+    height: 100%;
+    float: right;
+    line-height: 60px;
+    color: rgb(169, 169, 169);
+    font-weight: 300;
+}
+.cart.settlement a{
+	color: rgb(255, 100, 100);
+}
+/*详情 end*/
+
+/*提交订单 start*/
+.check header,
+.selectAdress header,
+.add_address header,
+.selectPayMethod header{
+	width: 100%;
+	display: table;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	padding: 10px 5px;
+}
+.check header a,
+.selectAdress header a,
+.add_address header a,
+.selectPayMethod header a{
+	position: absolute;
+}
+.check header h3,
+.selectAdress header h3,
+.add_address header h3,
+.selectPayMethod header h3{
+	font-size: 14px;
+    text-align: center;
+    font-weight: 400;
+    color: rgb(84, 84, 84);
+}
+.addressContainer,
+.check_row,
+.addAdress,
+.add_address_row{
+	width: 100%;
+	min-height: 40px;
+	display: table;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	line-height: 40px;
+	padding: 0px 12px;
+}
+.addressContainer .l_text:before,
+.addAdress .l_text:before{
+	content: "+";
+	border:1px solid rgba(0, 0, 0, 0.1);
+	padding: 0px 4px 2px;
+	text-align: center;
+	margin-right: 10px;
+}
+.addressContainer span,
+.check_row span,
+.addAdress span{
+	font-size: 14px;
+	color: rgba(135, 135, 135, 1);
+}
+.l_text{
+	float: left;
+}
+.r_text{
+	float: right;
+}
+.payment{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 60px;
+	background-color: rgb(51, 51, 51);
+	line-height: 60px;
+}
+.payment{
+	padding-left: 12px;
+	color: rgb(255, 100, 100);
+}
+.payment span{
+	color: rgba(135, 135, 135, 1);
+}
+.payment a{
+	display: block;
+	width: 40%;
+	height: 100%;
+	float: right;
+	text-align: center;
+	background-color: rgb(253, 220, 140);
+	color: rgb(255, 100, 100);
+}
+.border_top{
+	border-top: 10px solid rgb(245, 245, 245);
+}
+/*提交订单 end*/
+
+/*选择地址 start*/
+.address_list{
+	width: 100%;
+	display: table;
+	padding: 0px 10px;
+}
+.address_list li{
+	display: block;
+	width: 100%;
+	display: table;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	position: relative;
+}
+.address_list li > span,
+.add_address_row ul li span,
+.selectPayMethod ul li span{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border:1px solid rgba(255, 100, 100, 0.3);
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	margin-top: -10px;
+	left: 0px;
+}
+.address_list li.selected > span:before,
+.add_address_row ul li.selected span:before,
+.selectPayMethod ul li.selected span:before{
+	content: "";
+    position: absolute;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 100, 100, 1);
+    top: 50%;
+    left: 50%;
+    margin-top: -5px;
+    margin-left: -5px;
+}
+.address_list li > a{
+	display: block;
+	width: 50px;
+	position: absolute;
+	right: 0px;
+	top: 50%;
+	margin-top: -11px;
+	text-align: center;
+    border-left: 1px solid rgba(255, 100, 100, 1);
+}
+.icon_edit{
+	width: 22px;
+	height: 22px;
+	fill:rgba(135, 135, 135, 1);
+	vertical-align: -4px;
+}
+.addressDetail{
+	margin-left: 30px;
+	margin-right: 50px;
+}
+/*选择地址 end*/
+
+/*添加地址 start*/
+.add_address h5{
+	font-size: 14px;
+	font-weight: 300;
+	line-height: 35px;
+	background-color: rgba(245, 245, 245, 1);
+	padding-left: 10px;
+}
+.add_address_row label{
+	font-size: 14px;
+	color: rgba(135, 135, 135, 1);
+	float: left;
+}
+.add_address_row input{
+	display: block;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    color: rgb(135, 135, 135);
+	margin: 20px 0px 10px;
+}
+.add_address_row input::-webkit-input-placeholder {
+    color: rgba(200, 200, 200, 1);
+}
+.add_address_row{
+	border-bottom: none;
+}
+.add_address_row ul li{
+	display: inline-block;
+    width: 100px;
+    position: relative;
+    padding-left: 25px;
+    color: rgba(135, 135, 135, 1);
+	font-size: 16px;
+}
+.save_btn{
+	display: block;
+	width: 80%;
+	height: 40px;
+	line-height: 40px;
+	margin: 0 auto;
+	text-align: center;
+	background-color: rgba(255, 100, 100, 1);
+	color: rgba(255, 255, 255, 1);
+	border-radius: 3px;
+	margin-top: 20px;
+}
+.save_btn:active{
+	color: rgba(255, 255, 255, 1);
+}
+/*添加地址 end*/
+
+/*选择支付方式 start*/
+.selectPayMethod ul li{
+	display: block;
+	width: 100%;
+	height: 45px;
+	padding:10px 12px 10px 50px;
+	font-size: 14px;
+	color: rgba(135, 135, 135, 1);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	position: relative;
+}
+.selectPayMethod ul li span{
+	left: 12px;
+}
+.icon_alipay,
+.icon_wechatPay,
+.icon_onlinePay{
+	width: 22px;
+	height: 22px;
+	vertical-align: -4px;
+	margin-right: 5px;
+}
+.icon_alipay{
+	fill:rgb(4, 161, 231);
+}
+.icon_wechatPay{
+	fill:rgb(0, 200, 0);
+}
+.icon_onlinePay{
+	fill:rgb(255, 100, 100);
+}
+/*选择支付方式 end*/

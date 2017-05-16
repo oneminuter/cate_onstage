@@ -1,0 +1,251 @@
+*{
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+	
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body{
+	font-family: "microsoft yahei";
+	background-color: rgb(55, 55, 55);
+}
+a{
+	text-decoration: none;
+}
+ul, ul li{
+	list-style-type: none;
+}
+.btn{
+	background-color: rgb(90, 152, 222);
+}
+.btn:hover{
+	background-color: rgb(83, 139, 203);
+}
+
+/*headder start*/
+header{
+	width: 100%;
+	display: table;
+	padding: 0px 15px;
+	background-color: rgb(34,34,34);
+}
+header h1{
+	font-size: 18px;
+	line-height: 40px;
+	display: table;
+	float: left;
+	color: rgb(255, 255, 255);
+}
+header a{
+	display: table;
+	height: 100%;
+	float: right;
+	line-height: 40px;
+	color: rgb(255, 255, 255);
+	padding: 0 10px;
+}
+header a:active{
+	background-color: rgb(77,129,185);
+}
+/*headder end*/
+
+/*content_container start*/
+.content_container{
+	width: 100%;
+	position: relative;
+}
+/*menu start*/
+.menu{
+	width: 200px;
+	height: 100%;
+	float: left;
+	background-color: rgb(51,51,51);
+}
+.menu dl dt{
+	width: 100%;
+	color: #fff;
+    border-bottom: 1px solid #222;
+	line-height: 35px;
+    padding-left: 15px;
+    cursor: pointer;
+    background-color: #333;
+	position: relative;
+    z-index: 1;
+}
+.menu dl dt::after{
+	content: "";
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border-right:1px solid rgb(255, 255, 255);
+	border-bottom:1px solid rgb(255, 255, 255);
+	float: right;
+	margin-top: 10px;
+    margin-right: 10px;
+	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+}
+.menu dl dd{
+	height: 0px;
+	position: relative;
+    z-index: -1;
+}
+.menu dl dd ul li{
+	line-height: 32px;
+    padding-left: 26px;
+	color: #fff;
+	cursor: pointer;
+}
+.menu dl dd ul{
+	padding: 0 15px;
+}
+.menu dl dd ul li:hover{
+	background-color: #777;
+}
+.menu dl.active dt::after{
+	transform:rotate(225deg);
+	-webkit-transform:rotate(225deg);
+}
+.menu dl.active dd{
+	z-index: 0;
+}
+.menu dl dt::after,
+.menu dl dd{
+	transition-duration:0.15s;
+	-webkit-transition-duration:0.15s;
+	transition-timing-function:ease-in-out;
+	-webkit-transition-timing-function:ease-in-out;
+	transition-property:height,z-index,transform;
+	-webkit-transition-property:height,z-index,transform;
+}
+/*menu end*/
+
+/*slidePannel、foodPannel start*/
+.slidePannel,
+.foodPannel{
+	height: 100%;
+	margin-left: 200px;
+	background-color: rgba(55, 55, 55, 1);
+	padding: 20px;
+}
+.slidePannel,
+.addSlide{
+	display: none;
+}
+/*.foodPannel{
+	display: none;
+}*/
+.addSlide::before,
+.addFood::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: 30%;
+    color: red;
+}
+.addSlide h2,
+.addFood h2{
+    color: #e4e4e4;
+    font-size: 18px;
+    line-height: 40px;
+}
+.addSlide label,
+.addFood label{
+	color: #e4e4e4;
+    padding: 0 20px 0 15px;
+    float: left;
+    display: block;
+    width: 150px;
+    line-height: 35px;
+}
+.preview{
+    height: 100px;
+    overflow: hidden;
+    outline: 1px solid rgb(255, 255, 255);
+    position: relative;
+    background-size: 100% auto;
+    margin-top: 4px;
+}
+.addSlide .preview{
+	width: 333.333333px;
+}
+.addFood .preview{
+	width: 100px;
+}
+.preview input[type="file"]{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+.preview::before,
+.preview::after{
+	content: "";
+    display: block;
+    width: 40px;
+    height: 1px;
+    position: absolute;
+    left: 50%;
+    background-color: #d7d7d7;
+    margin-left: -20px;
+    top: 50%;
+    margin-top: -0.5px;
+}
+.preview::after{
+	transform:rotate(90deg);
+	-webkit-transform:rotate(90deg);
+}
+.slidePannel input[type="text"],
+.foodPannel select,
+.foodPannel input[type="text"],
+.foodPannel input[type="number"]{
+	width: 50%;
+	height: 35px;
+	display: block;
+	background-color: rgba(255, 255, 255, 0.8);
+	padding-left: 5px;
+	color: rgb(31, 31, 31);
+	margin: 2px 0px;
+}
+.slidePannel a[id="addSlideBtn"],
+.foodPannel a[id="addFoodSubmitBtn"],
+.foodPannel a[id="addShicaiSubmitBtn"],
+.foodPannel a[id="addShipuSubmitBtn"],
+.foodPannel a[id="addOtherSubmitBtn"]{
+	display: block;
+    width: 80px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    color: #fff;
+	margin-left: 150px;
+}
+.foodPannel a[id="addShicaiSubmitBtn"],
+.foodPannel a[id="addShipuSubmitBtn"],
+.foodPannel a[id="addOtherSubmitBtn"]{
+	margin-top: 2px;
+}
+.address select{
+	width: 16.5%;
+    float: left;
+    margin-right: 3px;
+}
+.addFood #addFood_detailAddress{
+	margin-left: 150px;
+}
+.addShicaiContainer,
+.addShipuContainer,
+.addOther{
+	display: none;
+}
+/*slidePannel、.foodPannel end*/
+
+.editor{
+	display: block;
+    margin-left: 150px;
+}
+/*content_container end*/

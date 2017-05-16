@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>test</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+	<body>
+		<h1>this is test.html</h1>
+		<script src="js/mui.min.js"></script>
+		<script>
+			mui.init();
+			
+//			mui.plusReady(function(){
+//				window.onload = function(){
+//					console.log("当前页面URL："+plus.webview.currentWebview().getURL());
+//				    var self = plus.webview.currentWebview();
+//					var froma = self.froma;
+//					
+//					console.log(froma);
+//				}
+//添加newId自定义事件监听
+window.addEventListener('newsId',function(event){
+  //获得事件参数
+  var id = event.detail.id;
+  //根据id向服务器请求新闻详情
+	console.log(id);
+});					
+			    
+//			});
+				
+		</script>
+	</body>
+</html>
