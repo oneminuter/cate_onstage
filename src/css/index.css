@@ -36,20 +36,6 @@ body{
 	background: rgba(255, 255, 255, 1);
 }
 /*轮播 end*/
-.toast{
-	background-color: rgba(0, 0, 0, 0.4);
-    width: 250px;
-    display: none;
-    position: absolute;
-    top: 20%;
-    z-index: 3;
-    left: 50%;
-    margin-left: -125px;
-    color: rgba(255, 255, 255, 0.65);
-    padding: 8px;
-    border-radius: 8px;
-    text-align: center;
-}
 
 /*content start*/
 .content{
@@ -253,9 +239,9 @@ body{
 	vertical-align: -5px;
 }
 .foodImg{
-	width: 100%;
-	max-height: 120px;
-	overflow: hidden;
+	width: 45%;
+    overflow: hidden;
+    margin: 0 auto;
 }
 .foodImg img{
 	display: block;
@@ -580,3 +566,47 @@ body{
 	fill:rgb(255, 100, 100);
 }
 /*选择支付方式 end*/
+
+/*loading start*/
+.loading_box{
+	margin-top: 100px;
+	text-align: center;
+}
+.loading1,
+.loading2,
+.loading3{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: rgba(255, 100, 100, 1);
+
+	-webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+    animation: bouncedelay 1.4s infinite ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.loading1{
+	-webkit-animation-delay: -0.32s;
+	animation-delay: -0.32s;
+}
+.loading2{
+	-webkit-animation-delay: -0.16s;
+	animation-delay: -0.16s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+ 
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+/*loading end*/

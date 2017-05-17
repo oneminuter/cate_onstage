@@ -15,7 +15,11 @@ var urlUtil = {
 		//添加食材、食谱、其他品类
 		addFoodShicaiOrShipuOrOtherSubmit: "/admin/food/addFoodShicaiOrShipuOrOtherSubmit",
 		//获取美食列表
-		getFoodList: "/index/food/getFoodList"
+		getFoodList: "/index/food/getFoodList",
+		//获取详情
+		getDetail: "/index/food/getDetail",
+		//获取订单详情
+		getCheckInfo: "/index/food/getCheckInfo"
 	},
 	
 	//根据操作名，返回需要请求的路径

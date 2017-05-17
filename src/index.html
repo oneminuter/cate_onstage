@@ -195,12 +195,12 @@
 	</div>
 	<!-- mui-content end -->
 
-	<!-- <p class="toast">操作失败描述</p> -->
+	<!-- <p style="background-color: rgba(0, 0, 0, 0.4);width: 200px;position: absolute;top: 20%;z-index: 3;left: 50%;margin-left: -100px;color: rgba(255, 255, 255, 0.65);padding: 8px;border-radius: 8px;text-align: center;">toast弹窗</p> -->
 
 	<!-- 详情 start -->
 	<section class="detail">
 		<!-- foodDetail start -->
-		<a href="javascript:;" class="closeDetailPannel">
+		<a href="javascript:hidden('detail')" class="closeDetailPannel">
 			<svg class="icon icon_left" aria-hidden="true">
 				<use xlink:href="#icon-left"></use>
 			</svg>
@@ -210,6 +210,13 @@
 				<use xlink:href="#icon-share"></use>
 			</svg>
 		</a>
+
+		<div class="loading_box">
+			<i class="loading1"></i>
+			<i class="loading2"></i>
+			<i class="loading3"></i>
+		</div>
+		
 		<div class="foodImg">
 			<img src="img/banner1.jpg" alt="">
 		</div>
@@ -221,7 +228,7 @@
 			<div class="mui-numbox" data-numbox-min="0">
 				<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
 				<input id="test" class="mui-input-numbox" type="number" value="0">
-				<button class="mui-btn mui-btn-numbox-plus" type="button" disabled="">+</button>
+				<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
 			</div>
 
 			<h5>商品详情</h5>
@@ -233,7 +240,7 @@
 				   <use xlink:href="#icon-cart"></use>
 				</svg>
 				<h4>￥<span>0</span></h4>
-				<a href="javascript:;">加入购物车</a>
+				<a href="javascript:;" id="addToCartBtn">加入购物车</a>
 			</div>
 		</div>
 		<!-- foodDetail end -->
@@ -243,15 +250,20 @@
 	<!-- 提交订单 start -->
 	<section class="check">
 		<header>
-			<a href="javascript:;" class="closeCheckPannel">
+			<a href="javascript:publicFunc.hidden('check');" class="closeCheckPannel">
 				<svg class="icon icon_left" aria-hidden="true">
 					<use xlink:href="#icon-left"></use>
 				</svg>
 			</a>
 			<h3>提交订单</h3>
 		</header>
+		<div class="loading_box">
+			<i class="loading1"></i>
+			<i class="loading2"></i>
+			<i class="loading3"></i>
+		</div>
 		
-		<div class="addressContainer">
+		<div class="addressContainer" onclick="show('selectAdress')">
 			<span class="l_text">选择收货地址</span>
 			<span class="r_text">
 				<svg class="icon icon_right" aria-hidden="true">
@@ -260,7 +272,7 @@
 			</span>
 		</div>
 	
-		<div class="check_row">
+		<div class="check_row" onclick="show('selectPayMethod')">
 			<span class="l_text">支付方式</span>
 			<span class="r_text">
 				在线支付
@@ -330,14 +342,13 @@
 			￥14.5 <span>(已优惠￥3)</span>
 			<a href="javascript:;">提交订单</a>
 		</div>
-		
 	</section>
 	<!-- 提交订单 end -->
 
 	<!-- 选择收货地址 start -->
 	<section class="selectAdress">
 		<header>
-			<a href="javascript:;">
+			<a href="javascript:;" class="closeSelectAdress">
 				<svg class="icon icon_left" aria-hidden="true">
 					<use xlink:href="#icon-left"></use>
 				</svg>
@@ -392,7 +403,7 @@
 	<!-- 增加收货地址 start -->
 	<section class="add_address">
 		<header>
-			<a href="javascript:;">
+			<a href="javascript:;" class="closeAdd_address">
 				<svg class="icon icon_left" aria-hidden="true">
 					<use xlink:href="#icon-left"></use>
 				</svg>
@@ -432,7 +443,7 @@
 	<!-- 选择支付方式start -->
 	<section class="selectPayMethod">
 		<header>
-			<a href="javascript:;">
+			<a href="javascript:;" class="closeSelectPayMethod">
 				<svg class="icon icon_left" aria-hidden="true">
 					<use xlink:href="#icon-left"></use>
 				</svg>
