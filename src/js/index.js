@@ -3,7 +3,7 @@
 		controller: function(){
 			//处事话轮播
 			index.initSlide();
-			index.getFoodList();
+			// index.getFoodList();  //两个同时请求会导致resultSet关闭异常
 			index.bind();
 		},
 		
@@ -15,6 +15,7 @@
 				success:function(data){
 					if(data.header.success){
 						index.renderSlide(data.body);
+						index.getFoodList(); //解决：两个同时请求会导致resultSet关闭异常
 					}else{
 						util.toast(data.header.errorInfo);
 					}
@@ -82,6 +83,15 @@
 		 			mui.trigger(document.querySelector(".mui-backdrop"), 'tap');
 		 		}, false);
 		 	}
+
+		 	//添加收货地址-选择性别
+		 	var lis = mui("#receiverGender li");
+		 	for(var i = 0; i < lis.length; i++){
+		 		lis[i].addEventListener("tap", function(){
+		 			address.selectGender(this);
+		 		}, false);
+		 	}
+
 		},
 
 		//选中分类
@@ -319,9 +329,8 @@ var checkFunc = {
 			type: "post",
 			dataType: "json",
 			success: function(data){
-				if(data.header.success){
-					console.log(data.body);					
-					// checkFunc.renderCheck(data.body);
+				if(data.header.success){				
+					checkFunc.renderCheck(data.body);
 				}else{
 					util.toast(data.header.errorInfo);
 				}
@@ -342,7 +351,7 @@ var checkFunc = {
 						</a>\
 						<h3>提交订单</h3>\
 					</header>\
-					<div class="addressContainer" onclick="show(\'selectAdress\')">\
+					<div class="addressContainer" onclick="address.getAddressList()">\
 						<span class="l_text">选择收货地址</span>\
 						<span class="r_text">\
 							<svg class="icon icon_right" aria-hidden="true">\
@@ -350,7 +359,7 @@ var checkFunc = {
 							</svg>\
 						</span>\
 					</div>\
-					<div class="check_row" onclick="show(\'selectPayMethod\')">\
+					<div class="check_row" onclick="publicFunc.show(\'selectPayMethod\')">\
 						<span class="l_text">支付方式</span>\
 						<span class="r_text">\
 							在线支付\
@@ -361,35 +370,35 @@ var checkFunc = {
 					</div>\
 					<div class="check_row">\
 						<span class="l_text">代金券</span>\
-						<span class="r_text">￥4</span>\
+						<span class="r_text">￥' + data.cash + '</span>\
 					</div>\
 					<div class="check_row border_top">\
-						<span class="l_text">吉祥淳（营养套餐，刚翻蒸饺）</span>\
+						<span class="l_text">' + data.storeName + '</span>\
 						<span class="r_text">由商家配送</span>\
 					</div>\
 					<div class="check_row">\
-						<span class="l_text">一荤两素套餐</span>\
-						<span class="c_text">x1</span>\
-						<span class="r_text">￥16</span>\
+						<span class="l_text">' + data.foodName + '</span>\
+						<span class="c_text">x' + data.buyNumber + '</span>\
+						<span class="r_text">￥'+ data.foodCost +'</span>\
 					</div>\
 					<div class="check_row">\
 						<span class="l_text">餐盒费</span>\
-						<span class="r_text">￥1.5</span>\
+						<span class="r_text">￥' + data.packFee + '</span>\
 					</div>\
 					<div class="check_row">\
 						<span class="l_text">配送费</span>\
-						<span class="r_text">￥4</span>\
+						<span class="r_text">￥' + data.freight + '</span>\
 					</div>\
 					<div class="check_row">\
 						<span class="l_text">满减优惠</span>\
-						<span class="r_text">-￥3</span>\
+						<span class="r_text">-￥'+ data.favorablePrice +'</span>\
 					</div>\
 					<div class="check_row">\
-						<span class="l_text">总计￥17.5 已优惠￥3</span>\
-						<span class="r_text">待支付￥14</span>\
+						<span class="l_text">总计￥'+ data.totalCost +' （已优惠￥' + data.favorablePrice + '，代金券￥' + data.cash + '）</span>\
+						<span class="r_text">待支付￥' + data.payment + '</span>\
 					</div>\
 					<div class="check_row border_top">\
-						<span class="l-text">用餐人数</span>\
+						<span class="l-text">用餐人数: ' + data.peopleNumber + '</span>\
 						<span class="r_text">\
 							以便商家给您带够餐具\
 							<svg class="icon icon_right" aria-hidden="true">\
@@ -407,9 +416,162 @@ var checkFunc = {
 						</span>\
 					</div>\
 					<div class="payment">\
-						￥14.5 <span>(已优惠￥3)</span>\
+						￥' + data.payment + ' <span>(已优惠￥' + data.favorablePrice + ')</span>\
 						<a href="javascript:;">提交订单</a>\
 					</div>';
+		mui(".check")[0].innerHTML = html;
 	}
 }
 // checkFunc end
+
+var address = {
+	//添加收货地址 - 保存收货地址
+	save: function(){
+		// var userId = util.setSessionStorage("userId"); //*****************************************需要完善*/
+		var userId = 1;
+		var province = mui("#province")[0].value;
+		var detailAddress = mui("#detailAdress")[0].value;
+		var receiverGender = mui("#receiverGender")[0].getAttribute("data-receiverGender");
+		var phone = mui("#receiverPhone")[0].value;
+
+		if( util.trim(province) == "" ){
+			util.toast("请输入地址");
+			return false;
+		} else if ( util.trim(detailAddress) == "" ){
+			util.toast("请输入楼号");
+			return false;
+		} else if ( util.trim(phone) == "" ){
+			util.toast("请输入收货人手机号，方便配送员联系你");
+			return false;
+		} else {
+			mui.ajax(urlUtil.getRequestUrl("addReceiveAddress"), {
+				data: {
+					userId: userId,
+					province: province,
+					detailAddress: detailAddress,
+					receiverGender: receiverGender,
+					phone: phone
+				},
+				type: "post",
+				dataType: "json",
+				success: function(data){
+					if(data.header.success){
+						util.toast("保存成功");
+						address.getAddressList();
+					}else{
+						util.toast(data.header.errorInfo);
+					}
+				},
+				error: function(xhr,type,errorThrown ){
+					util.toast(type + "错误，保存地址错误，请稍后重试");
+				}
+			});
+		}
+	},
+
+	//选择收货地址 - 获取收货地址
+	getAddressList: function(){
+		mui(".add_address")[0].style.display = "none";
+		mui(".selectAdress")[0].style.display = "block";
+		mui(".selectAdress")[0].innerHTML = '<header>\
+												<a href="javascript:publicFunc.hidden(\'selectAdress\');" class="closeSelectAdress">\
+													<svg class="icon icon_left" aria-hidden="true">\
+														<use xlink:href="#icon-left"></use>\
+													</svg>\
+												</a>\
+												<h3>选择收货地址</h3>\
+											</header>\
+											<div class="loading_box">\
+												<i class="loading1"></i>\
+												<i class="loading2"></i>\
+												<i class="loading3"></i>\
+											</div>';
+		mui.ajax(urlUtil.getRequestUrl("getAddressList"), {
+			data: {
+				// userId: util.setSessionStorage("userid")
+				userId: 1
+			},
+			type: "post",
+			dataType: "json",
+			success: function(data){
+				if(data.header.success){
+					address.renderSelectAdress(data.body);
+				}else{
+					util.toast(data.header.success);
+				}
+			},
+			error: function(xhr, type, errorThrown){
+				util.toast(type + "错误，获取地址列表错误，请稍后重试");
+			}
+		})
+	},
+
+	//渲染选择地址列表面板
+	renderSelectAdress: function(data){
+		var html = '<header>\
+						<a href="javascript:publicFunc.hidden(\'selectAdress\');" class="closeSelectAdress">\
+							<svg class="icon icon_left" aria-hidden="true">\
+								<use xlink:href="#icon-left"></use>\
+							</svg>\
+						</a>\
+						<h3>选择收货地址</h3>\
+					</header>\
+					<div class="addAdress" onclick="publicFunc.show(\'add_address\')">\
+						<span class="l_text">新增收货地址</span>\
+					</div>';
+		mui(".selectAdress")[0].innerHTML = html;
+		var ul = document.createElement("ul");
+		ul.className = "address_list";
+		for(var i = 0; i < data.length; i++){
+			var li = document.createElement("li");
+			i == 0 ? li.className = "selected" : "";
+			li.innerHTML = '<span></span>\
+							<div class="addressDetail">\
+								<p>\
+									<span>' + data[i].province + '</span>\
+									<span>' + data[i].detailAddress + '</span>\
+								</p>\
+								<p>\
+									<span>林廷勇</span>\
+								 	<span>' + ( data[i].receiverGender == 1 ? "先生" : "女士" )+ '</span>\
+								 	<span>' + data[i].phone + '</span>\
+								</p>\
+							</div>\
+							<a href="javascript:address.editAddress(id);">\
+								<svg class="icon icon_edit" aria-hidden="true">\
+									<use xlink:href="#icon-revise"></use>\
+								</svg>\
+							</a>';
+			li.addEventListener("tap", function(){
+				address.selectAdresss(this);
+			}, false);
+			ul.appendChild(li);
+		}
+
+		mui(".selectAdress")[0].appendChild(ul);
+	},
+
+	//添加收货地址-选择性别
+	selectGender: function(element){
+		var lis = mui("#receiverGender li");
+		for(var i = 0; i < lis.length; i++){
+			lis[i].className = "";
+		}
+		element.className = "selected";
+		element.parentNode.setAttribute("data-receiverGender", element.getAttribute("data-gender"));
+	},
+
+	//编辑地址
+	editAddress: function(id){
+		console.log("编辑地址");
+	},
+
+	//选择地址
+	selectAdresss: function(element){
+		var  lis = mui(".address_list li");
+		for(var i = 0; i < lis.length; i++){
+			lis[i].className = "";
+		}
+		element.className = "selected";
+	}
+}

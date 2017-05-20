@@ -19,7 +19,11 @@ var urlUtil = {
 		//获取详情
 		getDetail: "/index/food/getDetail",
 		//获取订单详情
-		getCheckInfo: "/index/food/getCheckInfo"
+		getCheckInfo: "/index/food/getCheckInfo",
+		//添加收货地址
+		addReceiveAddress: "/index/food/addReceiveAddress",
+		//获取收货地址列表
+		getAddressList: "/index/food/getAddressList"
 	},
 	
 	//根据操作名，返回需要请求的路径

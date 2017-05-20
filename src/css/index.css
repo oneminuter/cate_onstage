@@ -217,6 +217,7 @@ body{
 	top: 0px;
     left: 0px;
     background-color: rgb(255, 255, 255);
+    padding-top: 42px;
     display: none;
 }
 .closeDetailPannel,
@@ -342,6 +343,10 @@ body{
 	display: table;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	padding: 10px 5px;
+	position: fixed;
+    top: 0px;
+	z-index: 1;
+    background-color: #fff;
 }
 .check header a,
 .selectAdress header a,

@@ -348,14 +348,14 @@
 	<!-- 选择收货地址 start -->
 	<section class="selectAdress">
 		<header>
-			<a href="javascript:;" class="closeSelectAdress">
+			<a href="javascript:publicFunc.hidden('selectAdress');" class="closeSelectAdress">
 				<svg class="icon icon_left" aria-hidden="true">
 					<use xlink:href="#icon-left"></use>
 				</svg>
 			</a>
 			<h3>选择收货地址</h3>
 		</header>
-		<div class="addAdress">
+		<div class="addAdress" onclick="publicFunc.show('add_address')">
 			<span class="l_text">新增收货地址</span>
 		</div>
 		<ul class="address_list">
@@ -403,7 +403,7 @@
 	<!-- 增加收货地址 start -->
 	<section class="add_address">
 		<header>
-			<a href="javascript:;" class="closeAdd_address">
+			<a href="javascript:publicFunc.hidden('add_address');" class="closeAdd_address">
 				<svg class="icon icon_left" aria-hidden="true">
 					<use xlink:href="#icon-left"></use>
 				</svg>
@@ -415,28 +415,28 @@
 			<input type="text" placeholder="请输入姓名">
 		</div>
 		<div class="add_address_row">
-			<ul>
-				<li class="selected">
+			<ul id="receiverGender" data-receiverGender=1>
+				<li class="selected" data-gender=1>
 					<span></span>
 					先生
 				</li>
-				<li>
+				<li data-gender=0>
 					<span></span>
 					女士
 				</li>
 			</ul>
 		</div>
 		<div class="add_address_row">
-			<input type="text" placeholder="请输入收货手机号码">
+			<input id="receiverPhone" type="text" placeholder="请输入收货手机号码">
 		</div>
 
 		<h5>收货地址</h5>
 		<div class="add_address_row">
-			<input type="text" placeholder="小区/大厦/学校    例：太原理工大学">
-			<input type="text" placeholder="楼号-门牌号    例：3号楼603">
+			<input id="province" type="text" placeholder="小区/大厦/学校    例：太原理工大学">
+			<input id="detailAdress" type="text" placeholder="楼号-门牌号    例：3号楼603">
 		</div>
 		
-		<a href="javascript:;" class="save_btn">保存</a>
+		<a href="javascript:address.save();" class="save_btn">保存</a>
 	</section>
 	<!-- 增加收货地址 end -->
 
