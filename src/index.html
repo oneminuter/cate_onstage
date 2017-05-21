@@ -274,7 +274,7 @@
 	
 		<div class="check_row" onclick="show('selectPayMethod')">
 			<span class="l_text">支付方式</span>
-			<span class="r_text">
+			<span class="r_text" id="paymethod">
 				在线支付
 				<svg class="icon icon_right" aria-hidden="true">
 					<use xlink:href="#icon-right"></use>
@@ -318,7 +318,7 @@
 			<span class="r_text">待支付￥14</span>
 		</div>
 
-		<div class="check_row border_top">
+		<div class="check_row border_top" id="peopleNumber">
 			<span class="l-text">用餐人数</span>
 			<span class="r_text">
 				以便商家给您带够餐具
@@ -328,7 +328,7 @@
 			</span>
 		</div>
 
-		<div class="check_row">
+		<div class="check_row" onclick="publicFunc.show('remark')">
 			<span class="l_text">备注</span>
 			<span class="r_text">
 				口味，偏好要求等
@@ -412,7 +412,7 @@
 		</header>
 		<h5>联系人</h5>
 		<div class="add_address_row">
-			<input type="text" placeholder="请输入姓名">
+			<input type="text" placeholder="请输入姓名" id="receiverName">
 		</div>
 		<div class="add_address_row">
 			<ul id="receiverGender" data-receiverGender=1>
@@ -443,7 +443,7 @@
 	<!-- 选择支付方式start -->
 	<section class="selectPayMethod">
 		<header>
-			<a href="javascript:;" class="closeSelectPayMethod">
+			<a href="javascript:publicFunc.hidden('selectPayMethod');">
 				<svg class="icon icon_left" aria-hidden="true">
 					<use xlink:href="#icon-left"></use>
 				</svg>
@@ -475,6 +475,57 @@
 		</ul>
 	</section>
 	<!-- 选择支付方式end -->
+
+	<!-- 用餐人数 start -->
+	<section class="people_number">
+		<header>
+			<a href="javascript:publicFunc.hidden('people_number');">
+				<svg class="icon icon_left" aria-hidden="true">
+					<use xlink:href="#icon-left"></use>
+				</svg>
+			</a>
+			<h3>用餐人数</h3>
+		</header>
+		<ul>
+			<li class="selected">1人</li>
+			<li>2人</li>
+			<li>3人</li>
+			<li>4人</li>
+		</ul>
+		<div class="other_number">
+			其他
+			<input type="number">
+			<a href="javascript:peopleNumber.otherNumber();">确定</a>
+		</div>
+	</section>
+	<!-- 用餐人数 end -->
+
+	<!-- 备注 口味偏好 start -->
+	<section class="remark">
+		<header>
+			<a href="javascript:publicFunc.hidden('remark');">
+				<svg class="icon icon_left" aria-hidden="true">
+					<use xlink:href="#icon-left"></use>
+				</svg>
+			</a>
+			<h3>用餐人数</h3>
+			<a class="complete" href="javascript:;">完成</a>
+		</header>
+		<div class="otherRemark">
+			<textarea placeholder="口味，偏好等要求"></textarea>
+		</div>
+		<p>常用备注</p>
+		<ul>
+			<li>不吃辣</li>
+			<li>少放辣</li>
+			<li>多放辣</li>
+			<li>不吃蒜</li>
+			<li>不吃香菜</li>
+			<li>不吃葱</li>
+		</ul>
+	</section>
+	<!-- 备注 口味偏好 end -->
+
 
 	<script src="js/mui.min.js"></script>
 	<script src="js/urlUtil.js" type="text/javascript" charset="utf-8"></script>

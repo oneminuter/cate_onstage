@@ -92,6 +92,30 @@
 		 		}, false);
 		 	}
 
+		 	//选择支付方式
+		 	var methods = mui(".selectPayMethod > ul li");
+		 	for(var i = 0; i < methods.length; i++){
+		 		methods[i].addEventListener("tap", function(){
+		 			selectPayMethod.select(this);
+		 		}, false);
+		 	}
+
+		 	//用餐人数
+		 	var peopelNumbers = mui(".people_number ul li");
+		 	for(var i = 0; i < peopelNumbers.length; i++){
+		 		peopelNumbers[i].addEventListener("tap", function(){
+		 			peopleNumber.select(this);
+		 		}, false);
+		 	}
+
+		 	//口味偏好备注
+		 	var remarks = mui(".remark ul li");
+		 	for(var i = 0; i < remarks.length; i++){
+		 		remarks[i].addEventListener("tap", function(){
+		 			remark.select(this);
+		 		}, false);
+		 	}
+
 		},
 
 		//选中分类
@@ -351,9 +375,9 @@ var checkFunc = {
 						</a>\
 						<h3>提交订单</h3>\
 					</header>\
-					<div class="addressContainer" onclick="address.getAddressList()">\
-						<span class="l_text">选择收货地址</span>\
-						<span class="r_text">\
+					<div class="addressContainer" onclick="address.getAddressList()">'
+					+ ( util.getSessionStorage("address") == null ? "<span class='l_text'>选择收货地址</span>" : "<span class='selected_address'>" + util.getSessionStorage("address").replace("\n","<br/>") + "</span>" ) +
+						'<span class="r_text ' + ( util.getSessionStorage("address") != null ? "vertical_center" : "" ) + '">\
 							<svg class="icon icon_right" aria-hidden="true">\
 								<use xlink:href="#icon-right"></use>\
 							</svg>\
@@ -361,7 +385,7 @@ var checkFunc = {
 					</div>\
 					<div class="check_row" onclick="publicFunc.show(\'selectPayMethod\')">\
 						<span class="l_text">支付方式</span>\
-						<span class="r_text">\
+						<span class="r_text" id="paymethod">\
 							在线支付\
 							<svg class="icon icon_right" aria-hidden="true">\
 								<use xlink:href="#icon-right"></use>\
@@ -397,7 +421,7 @@ var checkFunc = {
 						<span class="l_text">总计￥'+ data.totalCost +' （已优惠￥' + data.favorablePrice + '，代金券￥' + data.cash + '）</span>\
 						<span class="r_text">待支付￥' + data.payment + '</span>\
 					</div>\
-					<div class="check_row border_top">\
+					<div class="check_row border_top" id="peopleNumber" onclick="publicFunc.show(\'people_number\')">\
 						<span class="l-text">用餐人数: ' + data.peopleNumber + '</span>\
 						<span class="r_text">\
 							以便商家给您带够餐具\
@@ -406,7 +430,7 @@ var checkFunc = {
 							</svg>\
 						</span>\
 					</div>\
-					<div class="check_row">\
+					<div class="check_row" onclick="publicFunc.show(\'remark\')">\
 						<span class="l_text">备注</span>\
 						<span class="r_text">\
 							口味，偏好要求等\
@@ -429,10 +453,11 @@ var address = {
 	save: function(){
 		// var userId = util.setSessionStorage("userId"); //*****************************************需要完善*/
 		var userId = 1;
-		var province = mui("#province")[0].value;
-		var detailAddress = mui("#detailAdress")[0].value;
+		var receiverName = mui("#receiverName")[0].value;
 		var receiverGender = mui("#receiverGender")[0].getAttribute("data-receiverGender");
 		var phone = mui("#receiverPhone")[0].value;
+		var province = mui("#province")[0].value;
+		var detailAddress = mui("#detailAdress")[0].value;
 
 		if( util.trim(province) == "" ){
 			util.toast("请输入地址");
@@ -449,6 +474,7 @@ var address = {
 					userId: userId,
 					province: province,
 					detailAddress: detailAddress,
+					receiverName: receiverName,
 					receiverGender: receiverGender,
 					phone: phone
 				},
@@ -457,6 +483,12 @@ var address = {
 				success: function(data){
 					if(data.header.success){
 						util.toast("保存成功");
+
+						var inputs = mui(".add_address input");
+						for(var i = 0; i < inputs.length; i++){
+							inputs[i].value = "";
+						}
+
 						address.getAddressList();
 					}else{
 						util.toast(data.header.errorInfo);
@@ -524,7 +556,7 @@ var address = {
 		ul.className = "address_list";
 		for(var i = 0; i < data.length; i++){
 			var li = document.createElement("li");
-			i == 0 ? li.className = "selected" : "";
+			// i == 0 ? li.className = "selected" : "";
 			li.innerHTML = '<span></span>\
 							<div class="addressDetail">\
 								<p>\
@@ -532,16 +564,11 @@ var address = {
 									<span>' + data[i].detailAddress + '</span>\
 								</p>\
 								<p>\
-									<span>林廷勇</span>\
+									<span>' + data[i].receiverName + '</span>\
 								 	<span>' + ( data[i].receiverGender == 1 ? "先生" : "女士" )+ '</span>\
 								 	<span>' + data[i].phone + '</span>\
 								</p>\
-							</div>\
-							<a href="javascript:address.editAddress(id);">\
-								<svg class="icon icon_edit" aria-hidden="true">\
-									<use xlink:href="#icon-revise"></use>\
-								</svg>\
-							</a>';
+							</div>';
 			li.addEventListener("tap", function(){
 				address.selectAdresss(this);
 			}, false);
@@ -552,26 +579,108 @@ var address = {
 	},
 
 	//添加收货地址-选择性别
-	selectGender: function(element){
+	selectGender: function(target){
 		var lis = mui("#receiverGender li");
 		for(var i = 0; i < lis.length; i++){
 			lis[i].className = "";
 		}
-		element.className = "selected";
-		element.parentNode.setAttribute("data-receiverGender", element.getAttribute("data-gender"));
-	},
-
-	//编辑地址
-	editAddress: function(id){
-		console.log("编辑地址");
+		target.className = "selected";
+		target.parentNode.setAttribute("data-receiverGender", target.getAttribute("data-gender"));
 	},
 
 	//选择地址
-	selectAdresss: function(element){
+	selectAdresss: function(target){
 		var  lis = mui(".address_list li");
 		for(var i = 0; i < lis.length; i++){
 			lis[i].className = "";
 		}
-		element.className = "selected";
+		target.className = "selected";
+		util.setSessionStorage("address", target.innerText);	
+		mui(".addressContainer")[0].innerHTML = '<span>' + target.innerText.replace("\n", "<br/>") + '</span>\
+												<span class="r_text vertical_center">\
+													<svg class="icon icon_right" aria-hidden="true">\
+														<use xlink:href="#icon-right"></use>\
+													</svg>\
+												</span>';
+		var timer = setTimeout(function(){
+			publicFunc.hidden("selectAdress");
+			clearTimeout(timer);
+		}, 500);
+	}
+}
+
+//选择支付方式
+var selectPayMethod = {
+	//选择
+	select: function(target){
+		var methods = mui(".selectPayMethod > ul li");
+		for(var i = 0; i < methods.length; i++){
+			methods[i].className = "";
+		}
+		target.className = "selected";
+		mui("#paymethod")[0].innerHTML = target.innerText +
+										'<svg class="icon icon_right" aria-hidden="true">\
+											<use xlink:href="#icon-right"></use>\
+										</svg>';
+		var timer = setTimeout(function(){
+			publicFunc.hidden("selectPayMethod");
+			clearTimeout(timer);
+		}, 500);
+	}
+}
+
+var peopleNumber = {
+	otherNumber: function(){
+		var number = mui(".other_number")[0].querySelector("input").value;
+		if(util.trim(number) == "" || number < 1){
+			return false;
+		}else{
+			mui("#peopleNumber")[0].innerHTML = '<span class="l-text">用餐人数: ' + number + '</span>\
+											<span class="r_text">\
+												<svg class="icon icon_right" aria-hidden="true">\
+													<use xlink:href="#icon-right"></use>\
+												</svg>\
+											</span>';
+			var timer = setTimeout(function(){
+				publicFunc.hidden("people_number");
+				console.log(mui(".other_number a")[0]);
+				mui(".other_number input")[0].value = "";
+			}, 500);
+		}
+	},
+
+	select: function(target){
+		var lis = mui(".people_number ul li");
+		for(var i = 0; i < lis.length; i++){
+			lis[i].className = "";
+		}
+		target.className = "selected";
+		var timer = setTimeout(function(){
+			target.className = "";
+			mui("#peopleNumber")[0].innerHTML = '<span class="l-text">用餐人数: ' + util.trim(target.innerHTML).substr(0, util.trim(target.innerHTML).length-1) + '</span>\
+											<span class="r_text">\
+												<svg class="icon icon_right" aria-hidden="true">\
+													<use xlink:href="#icon-right"></use>\
+												</svg>\
+											</span>';
+			publicFunc.hidden("people_number");
+		}, 500);
+	}
+}
+
+var remark = {
+	select: function(target){
+		var selected = target.className == "selected";
+		var mark = util.trim( mui(".otherRemark textarea")[0].value );
+		if( !selected ){
+			target.className = "selected";
+			console.log(mark.indexOf(target.innerHTML));
+			if( mark.indexOf(target.innerHTML) == -1 ){
+				mui(".otherRemark textarea")[0].value = util.trim( mui(".otherRemark textarea")[0].value ) + " " + target.innerHTML;
+			}
+		}else{
+			target.className = "";
+			mui(".otherRemark textarea")[0].value = util.trim( mui(".otherRemark textarea")[0].value.replace(target.innerHTML, "") );
+		}
 	}
 }
