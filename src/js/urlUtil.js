@@ -29,7 +29,11 @@ var urlUtil = {
 		//确认支付
 		confirmPay: "/index/food/confirmPay",
 		//获取订单列表
-		getOrderList: "/user/order/getOrderList"
+		getOrderList: "/user/order/getOrderList",
+		// 注册
+		register: "/user/register",
+		//登录
+		login: "/user/login"
 	},
 	
 	//根据操作名，返回需要请求的路径
