@@ -1,0 +1,129 @@
+*{
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+	
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body{
+	font-family: "microsoft yahei";
+	background-color: rgba(255, 255, 255, 1);
+}
+.mui-content header{
+	width: 100%;
+    display: table;
+    padding: 20px 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.user_icon{
+	width: 60px;
+	height: 60px;
+	overflow: hidden;
+	border-radius: 50%;
+	float: left;
+}
+.user_icon img{
+	width: 100%;
+	height: auto;
+}
+.user_info{
+	margin-left: 80px;
+}
+.account,
+.user_info a{
+	color: rgba(135, 135, 135, 0.6);
+	font-size: 16px;
+}
+.account{
+	margin-bottom: 0px;
+    line-height: 32px;
+	color: rgba(255, 100, 100, 1);
+}
+.main{
+	width: 100%;
+	display: table;
+	padding: 0px 12px;
+}
+.item_row{
+	width: 100%;
+    display: table;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 12px 0px;
+}
+.item_l{
+	float: left;
+}
+.item_r{
+	float: right;
+}
+.icon_balance,
+.icon_order,
+.icon_right,
+.icon_myrecommend,
+.icon_collect,
+.icon_integral,
+.icon_left{
+	vertical-align: -6px;
+	fill: rgba(255, 100, 100, 1);;
+}
+.item_l span,
+.item_r{
+	color: rgba(255, 100, 100, 1);
+	line-height: 40px;
+}
+.item_r .icon_right{
+	margin-right: -7px;
+}
+
+
+/*order start*/
+.order{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left:0px;
+	background-color: rgba(255, 255, 255, 1);
+	padding-top: 42px;
+	display: none;
+}
+.order ul li{
+	width: 100%;
+	display: table;
+	padding: 10px 12px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.thumbnail{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	overflow: hidden;
+	float: left;
+}
+.thumbnail img{
+	width: 100%;
+	height: auto;
+}
+.order_content{
+	margin-left: 50px;
+	position: relative;
+}
+.order_content h3{
+	font-size: 16px;
+}
+.order_content p{
+	font-size: 14px;
+	color: rgba(135, 135, 135, 1);
+	margin-bottom: 0px;
+}
+.order_content span{
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	color: rgba(255, 100, 100, 1);
+}
+/*order end*/

@@ -1,7 +1,12 @@
 var util = {
 	//去掉空格
+	// trim: function(str){
+	// 	return null==str?"":(str+"").replace("\s","")
+	// },
+
+	//去掉两端空格
 	trim: function(str){
-		return null==str?"":(str+"").replace("\s","")
+		return str.replace(/(^\s*)|(\s*$)/g, "");
 	},
 
 	//toast弹层

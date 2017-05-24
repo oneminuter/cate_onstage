@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 	<title>CATE+</title>
 	<link href="css/mui.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="css/public.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css"/>
 </head>
 <body>
@@ -38,7 +39,7 @@
 					<svg class="icon icon_meishi" aria-hidden="true">
 					  <use xlink:href="#icon-meishi"></use>
 					</svg>
-					<h4>美食</h4>
+					<h4>美mei食</h4>
 				</div>
 				<div class="classify_title_item" data-classify="shicai">
 					<svg class="icon icon_shicai" aria-hidden="true">
@@ -165,8 +166,8 @@
 		<!-- content end -->
 
 		<!-- 底部菜单 start -->
-		<nav class="mui-bar mui-bar-tab">
-			<a class="mui-tab-item mui-active" href="#tabbar">
+		<nav class="mui-bar mui-bar-tab" id="footer_menu">
+			<a class="mui-tab-item mui-active" href="###">
 				<svg class="icon icon_home" aria-hidden="true">
 					<use xlink:href="#icon-home"></use>
 				</svg>
@@ -184,7 +185,7 @@
 				</svg>
 				<span class="mui-tab-label">社区</span>
 			</a>
-			<a class="mui-tab-item" href="#tabbar-with-map">
+			<a class="mui-tab-item" href="user">
 				<svg class="icon icon_user" aria-hidden="true">
 					<use xlink:href="#icon-user"></use>
 				</svg>
@@ -328,7 +329,7 @@
 			</span>
 		</div>
 
-		<div class="check_row" onclick="publicFunc.show('remark')">
+		<div class="check_row" onclick="publicFunc.show('remark')" id="check_remark">
 			<span class="l_text">备注</span>
 			<span class="r_text">
 				口味，偏好要求等
@@ -340,7 +341,7 @@
 
 		<div class="payment">
 			￥14.5 <span>(已优惠￥3)</span>
-			<a href="javascript:;">提交订单</a>
+			<a href="javascript:checkFunc.submit();">提交订单</a>
 		</div>
 	</section>
 	<!-- 提交订单 end -->
@@ -451,7 +452,7 @@
 			<h3>选择支付方式</h3>
 		</header>
 		<ul>
-			<li class="selected">
+			<li>
 				<span></span>
 				<svg class="icon icon_alipay" aria-hidden="true">
 					<use xlink:href="#icon-alipay"></use>
@@ -509,10 +510,11 @@
 				</svg>
 			</a>
 			<h3>用餐人数</h3>
-			<a class="complete" href="javascript:;">完成</a>
+			<a class="complete" href="javascript:remark.complete();">完成</a>
 		</header>
 		<div class="otherRemark">
 			<textarea placeholder="口味，偏好等要求"></textarea>
+			<span>0/30</span>
 		</div>
 		<p>常用备注</p>
 		<ul>
@@ -526,11 +528,30 @@
 	</section>
 	<!-- 备注 口味偏好 end -->
 
+	<!-- 确认支付 start -->
+	<section class="confirm_pay">
+		<div class="confirm_body">
+			<h3>确认交易</h3>
+			<p>大三子 ￥30</p>
+			<div class="confirm_pay_btn">
+				<a href="javascript:pay.confirm(id);">支付</a>
+			</div>
+
+			<!-- 
+			<svg class="icon icon_success" aria-hidden="true">
+				<use xlink:href="#icon-success"></use>
+			</svg>
+			<h3>支付成功</h3> -->
+		</div>
+	</section>
+	<!-- 确认支付 end -->
+
 
 	<script src="js/mui.min.js"></script>
 	<script src="js/urlUtil.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/util.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/iconfont.js"></script>
+	<script src="js/public.js"></script>
+	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

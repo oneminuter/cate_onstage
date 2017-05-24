@@ -115,6 +115,10 @@
 		 			remark.select(this);
 		 		}, false);
 		 	}
+		 	//口味偏好控制，20字
+		 	mui(".otherRemark textarea")[0].addEventListener("keyup", function(){
+		 		remark.limit();
+		 	}, false);
 
 		},
 
@@ -200,20 +204,6 @@
 })()
 
 
-//公共方法
-var publicFunc = {
-	//显示面板
-	show: function(targetElement){
-		mui("."+targetElement)[0].style.display = "block";
-	},
-
-	//隐藏面板
-	hidden: function(targetElement){
-		mui("."+targetElement)[0].style.display = "none";
-	}
-}
-
-
 //详情页
 var detailFunc = {
 	//获取详情
@@ -222,11 +212,6 @@ var detailFunc = {
 		mui(".detail")[0].innerHTML = '<a href="publicFunc.hidden(\'detail\')" class="closeDetailPannel">\
 											<svg class="icon icon_left" aria-hidden="true">\
 												<use xlink:href="#icon-left"></use>\
-											</svg>\
-										</a>\
-										<a href="javascript:;" class="share">\
-											<svg class="icon icon_share" aria-hidden="true">\
-												<use xlink:href="#icon-share"></use>\
 											</svg>\
 										</a>\
 										<div class="loading_box">\
@@ -258,11 +243,6 @@ var detailFunc = {
 		var html = ['<a href="javascript:publicFunc.hidden(\'detail\')" class="closeDetailPannel">',
 						'<svg class="icon icon_left" aria-hidden="true">',
 							'<use xlink:href="#icon-left"></use>',
-						'</svg>',
-					'</a>',
-					'<a href="javascript:;" class="share">',
-						'<svg class="icon icon_share" aria-hidden="true">',
-							'<use xlink:href="#icon-share"></use>',
 						'</svg>',
 					'</a>',
 					'<div class="foodImg">',
@@ -430,7 +410,7 @@ var checkFunc = {
 							</svg>\
 						</span>\
 					</div>\
-					<div class="check_row" onclick="publicFunc.show(\'remark\')">\
+					<div class="check_row" onclick="publicFunc.show(\'remark\')" id="check_remark">\
 						<span class="l_text">备注</span>\
 						<span class="r_text">\
 							口味，偏好要求等\
@@ -441,9 +421,44 @@ var checkFunc = {
 					</div>\
 					<div class="payment">\
 						￥' + data.payment + ' <span>(已优惠￥' + data.favorablePrice + ')</span>\
-						<a href="javascript:;">提交订单</a>\
+						<a href="javascript:checkFunc.submit(' + data.id+ ');">提交订单</a>\
 					</div>';
 		mui(".check")[0].innerHTML = html;
+	},
+
+	//提交订单
+	submit: function(orderId){
+		var receiverAddress = ( typeof mui(".addressContainer .selected_address")[0] != "undefined" ? util.trim( mui(".addressContainer .selected_address")[0].innerText ) : null );
+		var payMethod = util.trim( mui("#paymethod")[0].innerText );
+		var peopleNumber = ( parseInt( mui("#peopleNumber .r_text")[0].innerText ).toString() != "NaN" ? parseInt(util.trim(mui("#peopleNumber .r_text")[0].innerText)) : 1 );
+		var other = util.trim( typeof mui("#check_remark .remark_text")[0] != "undefined" ? mui("#check_remark .remark_text")[0].innerText : "" );
+
+		if(receiverAddress == null || receiverAddress == ""){
+			util.toast("请选择收货地址");
+			return false;
+		}
+
+		mui.ajax(urlUtil.getRequestUrl("submitCheck"), {
+			data: {
+				orderId: orderId,
+				receiverAddress: receiverAddress,
+				payMethod: payMethod,
+				peopleNumber: peopleNumber,
+				other: other
+			},
+			type: "post",
+			dataType: "json",
+			success: function(data){
+				if(data.header.success){
+					pay.renderConfirmPay(data.body);
+				}else{
+					util.toast(data.header.errorInfo);
+				}
+			},
+			error: function(xhr,type, errorThrown){
+				util.toast(type + "错误，提交订单错误，请稍后重试");
+			}
+		});
 	}
 }
 // checkFunc end
@@ -527,7 +542,7 @@ var address = {
 			dataType: "json",
 			success: function(data){
 				if(data.header.success){
-					address.renderSelectAdress(data.body);
+					address.renderAdressList(data.body);
 				}else{
 					util.toast(data.header.success);
 				}
@@ -539,7 +554,7 @@ var address = {
 	},
 
 	//渲染选择地址列表面板
-	renderSelectAdress: function(data){
+	renderAdressList: function(data){
 		var html = '<header>\
 						<a href="javascript:publicFunc.hidden(\'selectAdress\');" class="closeSelectAdress">\
 							<svg class="icon icon_left" aria-hidden="true">\
@@ -595,8 +610,8 @@ var address = {
 			lis[i].className = "";
 		}
 		target.className = "selected";
-		util.setSessionStorage("address", target.innerText);	
-		mui(".addressContainer")[0].innerHTML = '<span>' + target.innerText.replace("\n", "<br/>") + '</span>\
+		util.setSessionStorage("address", target.innerText);
+		mui(".addressContainer")[0].innerHTML = '<span class="selected_address">' + target.innerText.replace("\n", "<br/>") + '</span>\
 												<span class="r_text vertical_center">\
 													<svg class="icon icon_right" aria-hidden="true">\
 														<use xlink:href="#icon-right"></use>\
@@ -629,7 +644,9 @@ var selectPayMethod = {
 	}
 }
 
+//用餐人数
 var peopleNumber = {
+	//输入其他人数
 	otherNumber: function(){
 		var number = mui(".other_number")[0].querySelector("input").value;
 		if(util.trim(number) == "" || number < 1){
@@ -649,6 +666,7 @@ var peopleNumber = {
 		}
 	},
 
+	//选择用餐人数
 	select: function(target){
 		var lis = mui(".people_number ul li");
 		for(var i = 0; i < lis.length; i++){
@@ -657,8 +675,9 @@ var peopleNumber = {
 		target.className = "selected";
 		var timer = setTimeout(function(){
 			target.className = "";
-			mui("#peopleNumber")[0].innerHTML = '<span class="l-text">用餐人数: ' + util.trim(target.innerHTML).substr(0, util.trim(target.innerHTML).length-1) + '</span>\
+			mui("#peopleNumber")[0].innerHTML = '<span class="l-text">用餐人数</span>\
 											<span class="r_text">\
+												' + util.trim(target.innerHTML).substr(0, util.trim(target.innerHTML).length-1) + '\
 												<svg class="icon icon_right" aria-hidden="true">\
 													<use xlink:href="#icon-right"></use>\
 												</svg>\
@@ -668,19 +687,103 @@ var peopleNumber = {
 	}
 }
 
+//口味偏好备注
 var remark = {
+	//选择常用备注
 	select: function(target){
 		var selected = target.className == "selected";
 		var mark = util.trim( mui(".otherRemark textarea")[0].value );
 		if( !selected ){
-			target.className = "selected";
-			console.log(mark.indexOf(target.innerHTML));
 			if( mark.indexOf(target.innerHTML) == -1 ){
 				mui(".otherRemark textarea")[0].value = util.trim( mui(".otherRemark textarea")[0].value ) + " " + target.innerHTML;
+			}
+			if( remark.limit() ){
+				target.className = "selected";
 			}
 		}else{
 			target.className = "";
 			mui(".otherRemark textarea")[0].value = util.trim( mui(".otherRemark textarea")[0].value.replace(target.innerHTML, "") );
 		}
+	},
+
+	//完成
+	complete: function(){
+		var remark = util.trim( mui(".otherRemark textarea")[0].value );
+		mui("#check_remark")[0].innerHTML = '<span class="l_text">备注</span>\
+											<span class="remark_text">\
+												' + remark + '\
+												<svg class="icon icon_right" aria-hidden="true">\
+													<use xlink:href="#icon-right"></use>\
+												</svg>\
+											</span>';
+		mui(".otherRemark textarea")[0].value = "";
+		var lis = mui(".remark ul li");
+		for(var i = 0; i < lis.length; i++){
+			lis[i].className = "";
+		}
+		publicFunc.hidden("remark");
+	},
+
+	//字数限制
+	limit: function(){
+		var remark = mui(".otherRemark textarea")[0].value;
+		var remark_len = remark.length;
+		mui(".otherRemark span")[0].innerHTML = remark_len + '/30';
+		if(remark_len > 30){
+		 	mui(".otherRemark textarea")[0].value = mui(".otherRemark textarea")[0].value.substr(0,30);
+		 	mui(".otherRemark span")[0].innerHTML = '30/30';
+		 	util.toast("只能输入20个字");
+		}
+
+		if(remark_len >= 30){
+			return false;
+		}else{
+			return true;
+		}
+	}
+}
+
+//支付
+var pay = {
+	confirm: function(id){
+		mui.ajax(urlUtil.getRequestUrl("confirmPay"),{
+			data: {
+				orderId: id
+			},
+			type: "post",
+			dataType: "json",
+			success: function(data){
+				if(data.header.success){
+					pay.paySuccess();
+				}else{
+					util.toast(data.header.errorInfo);
+				}
+			},
+			error: function(xhr, type, errorthrown){
+				util.toast(type + "错误，支付错误，请稍后重试");
+			}
+		});
+	},
+
+	//渲染支付面板
+	renderConfirmPay: function(data){
+		mui(".confirm_body")[0].innerHTML = '<h3>确认交易</h3>\
+											<p>' + data.storeName + ' ￥' + data.payMent + '</p>\
+											<div class="confirm_pay_btn">\
+												<a href="javascript:pay.confirm(' + data.orderId + ');">支付</a>\
+											</div>';
+		publicFunc.show("confirm_pay");
+	},
+
+	// 支付成功
+	paySuccess: function(){
+		mui(".confirm_body")[0].innerHTML = '<svg class="icon icon_success" aria-hidden="true">\
+												<use xlink:href="#icon-success"></use>\
+											</svg>\
+											<h3>支付成功</h3>';
+		var timer = setTimeout(function(){
+			publicFunc.hidden("confirm_pay");
+			window.location.href = "user";
+		}, 2000);
 	}
 }

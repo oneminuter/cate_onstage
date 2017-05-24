@@ -1,0 +1,127 @@
+*{
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+	
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body{
+	font-family: "microsoft yahei";
+	background-color: rgba(255, 255, 255, 1);
+}
+/*底部菜单 start*/
+.mui-bar{
+	box-shadow: none;
+}
+.mui-tab-item .icon{
+	width: 25px;
+    height: 25px;
+    fill: rgba(135, 135, 135, 1);
+}
+.mui-active .mui-tab-label,
+.mui-active .icon{
+	fill:rgba(255, 100, 100, 1);
+	color: rgba(255, 100, 100, 1);
+}
+/*底部菜单 end*/
+
+.icon{
+    width: 22px;
+    height: 22px;
+    fill:rgba(135, 135, 135, 1);
+}
+.icon_home,
+.icon_recommend,
+.icon_community,
+.icon_user{
+    display: block;
+	margin-top: 6px;
+    margin: 0 auto;
+}
+/*header start*/
+.check header,
+.selectAdress header,
+.add_address header,
+.selectPayMethod header,
+.people_number header,
+.remark header,
+.order header{
+	width: 100%;
+	display: table;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	padding: 10px 5px;
+	position: fixed;
+    top: 0px;
+	z-index: 1;
+    background-color: #fff;
+}
+.check header a,
+.selectAdress header a,
+.add_address header a,
+.selectPayMethod header a,
+.people_number header a,
+.remark header a,
+.order header a{
+	position: absolute;
+}
+.check header h3,
+.selectAdress header h3,
+.add_address header h3,
+.selectPayMethod header h3,
+.people_number header h3,
+.remark header h3,
+.order header h3{
+	font-size: 14px;
+    text-align: center;
+    font-weight: 400;
+    color: rgb(84, 84, 84);
+}
+/*header end*/
+
+/*loading start*/
+.loading_box{
+	margin-top: 100px;
+	text-align: center;
+}
+.loading1,
+.loading2,
+.loading3{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: rgba(255, 100, 100, 1);
+
+	-webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+    animation: bouncedelay 1.4s infinite ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.loading1{
+	-webkit-animation-delay: -0.32s;
+	animation-delay: -0.32s;
+}
+.loading2{
+	-webkit-animation-delay: -0.16s;
+	animation-delay: -0.16s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+ 
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+/*loading end*/

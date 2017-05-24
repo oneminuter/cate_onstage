@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>个人中心</title>
+	<link href="css/mui.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="css/public.css">
+	<link rel="stylesheet" href="css/user.css">
+</head>
+<body>
+	<div class="mui-content">
+		<header>
+			<div class="user_icon">
+				<img src="img/shipu4.jpg" alt="">
+			</div>
+			<div class="user_info">
+				<p class="account">手机号</p>
+				<a href="javascript:;">详细信息 >></a>
+			</div>
+		</header>
+
+		<!-- main start -->
+		<section class="main">
+			<div class="item_row">
+				<div class="item_l">
+					<svg class="icon icon_balance" aria-hidden="true">
+						<use xlink:href="#icon-balance"></use>
+					</svg>
+					<span>余额</span>
+				</div>
+				<div class="item_r">￥56.0</div>
+			</div>
+
+			<div class="item_row" onclick="order.getOrderList()">
+				<div class="item_l">
+					<svg class="icon icon_order" aria-hidden="true">
+						<use xlink:href="#icon-order"></use>
+					</svg>
+					<span>订单</span>
+				</div>
+				<div class="item_r">
+					<svg class="icon icon_right" aria-hidden="true">
+						<use xlink:href="#icon-right"></use>
+					</svg>
+				</div>
+			</div>
+
+			<div class="item_row">
+				<div class="item_l">
+					<svg class="icon icon_myrecommend" aria-hidden="true">
+						<use xlink:href="#icon-recommend"></use>
+					</svg>
+					<span>我的推荐</span>
+				</div>
+				<div class="item_r">
+					<svg class="icon icon_right" aria-hidden="true">
+						<use xlink:href="#icon-right"></use>
+					</svg>
+				</div>
+			</div>
+
+			<div class="item_row">
+				<div class="item_l">
+					<svg class="icon icon_collect" aria-hidden="true">
+						<use xlink:href="#icon-collect"></use>
+					</svg>
+					<span>我的收藏</span>
+				</div>
+				<div class="item_r">
+					<svg class="icon icon_right" aria-hidden="true">
+						<use xlink:href="#icon-right"></use>
+					</svg>
+				</div>
+			</div>
+
+			<div class="item_row">
+				<div class="item_l">
+					<svg class="icon icon_integral" aria-hidden="true">
+						<use xlink:href="#icon-integral"></use>
+					</svg>
+					<span>我的收藏</span>
+				</div>
+				<div class="item_r">32</div>
+			</div>
+		</section>
+		<!-- main end -->
+
+
+		<!-- 底部菜单 start -->
+		<nav class="mui-bar mui-bar-tab" id="footer_menu">
+			<a class="mui-tab-item" href="index">
+				<svg class="icon icon_home" aria-hidden="true">
+					<use xlink:href="#icon-home"></use>
+				</svg>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-chat">
+				<svg class="icon icon_recommend" aria-hidden="true">
+					<use xlink:href="#icon-recommend"></use>
+				</svg>
+				<span class="mui-tab-label">推荐</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-contact">
+				<svg class="icon icon_community" aria-hidden="true">
+					<use xlink:href="#icon-community"></use>
+				</svg>
+				<span class="mui-tab-label">社区</span>
+			</a>
+			<a class="mui-tab-item  mui-active" href="###">
+				<svg class="icon icon_user" aria-hidden="true">
+					<use xlink:href="#icon-user"></use>
+				</svg>
+				<span class="mui-tab-label">我</span>
+			</a>
+		</nav>
+		<!-- 底部菜单 end -->
+	</div>
+
+	<!-- order start -->
+	<section class="order">
+		<header>
+			<a href="javascript:publicFunc.hidden('order');">
+				<svg class="icon icon_left" aria-hidden="true">
+					<use xlink:href="#icon-left"></use>
+				</svg>
+			</a>
+			<h3>订单</h3>
+		</header>
+		<ul id="orderList">
+			<li>
+				<div class="thumbnail">
+					<img src="img/pic1.png" alt="">
+				</div>
+				<div class="order_content">
+					<h3>重庆小面</h3>
+					<p>下单时间: 2017-05-07 20:07</p>
+					<p>总价：￥16.88</p>
+					<span>已完成</span>
+				</div>
+			</li>
+		</ul>
+	</section>
+	<!-- order end -->
+	
+	<script src="js/mui.min.js"></script>
+	<script src="js/urlUtil.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/util.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/iconfont.js"></script>
+	<script src="js/public.js"></script>
+	<script src="js/user.js"></script>
+</body>
+</html>

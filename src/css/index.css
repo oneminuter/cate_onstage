@@ -1,19 +1,3 @@
-*{
-	border: 0px;
-	padding: 0px;
-	margin: 0px;
-	
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	-o-box-sizing: border-box;
-	box-sizing: border-box;
-}
-body{
-	font-family: "microsoft yahei";
-	background-color: rgba(255, 255, 255, 1);
-}
-
 /*轮播 start*/
 .dotcontrol{
 	display: table;
@@ -54,19 +38,10 @@ body{
 	width: 25%;
 	display: table;
 }
-.icon{
-    width: 32px;
-    height: 32px;
-    fill:rgba(135, 135, 135, 1);
-}
 .icon_meishi,
 .icon_shicai,
 .icon_shipu,
-.icon_all,
-.icon_home,
-.icon_recommend,
-.icon_community,
-.icon_user{
+.icon_all{
     display: block;
 	margin-top: 6px;
     margin: 0 auto;
@@ -128,6 +103,7 @@ body{
 .list_item_ul{
 	width: 100%;
 	display: table;
+	padding-bottom: 50px;
 }
 .list_item_ul li{
 	width: 100%;
@@ -187,22 +163,6 @@ body{
 }
 /*content end*/
 
-/*底部菜单 start*/
-.mui-bar{
-	box-shadow: none;
-}
-.mui-tab-item .icon{
-	width: 25px;
-    height: 25px;
-    fill: rgba(135, 135, 135, 1);
-}
-.mui-active .mui-tab-label,
-.mui-active .icon{
-	fill:rgba(255, 100, 100, 1);
-	color: rgba(255, 100, 100, 1);
-}
-/*底部菜单 end*/
-
 /*详情 start*/
 .detail,
 .check,
@@ -210,8 +170,9 @@ body{
 .add_address,
 .selectPayMethod,
 .people_number,
-.remark{
-	position: absolute;
+.remark,
+.confirm_pay{
+	position: fixed;
 	width: 100%;
 	height: 100%;
 	overflow: auto;
@@ -220,6 +181,7 @@ body{
     left: 0px;
     background-color: rgb(255, 255, 255);
     padding-top: 42px;
+    padding-bottom: 60px;
     display: none;
 }
 .closeDetailPannel,
@@ -288,7 +250,7 @@ body{
 	text-indent: 13px;
 }
 .cart{
-	position: absolute;
+	position: fixed;
 	bottom: 0px;
 	left: 0px;
 	width: 100%;
@@ -337,40 +299,6 @@ body{
 /*详情 end*/
 
 /*提交订单 start*/
-.check header,
-.selectAdress header,
-.add_address header,
-.selectPayMethod header,
-.people_number header,
-.remark header{
-	width: 100%;
-	display: table;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-	padding: 10px 5px;
-	position: fixed;
-    top: 0px;
-	z-index: 1;
-    background-color: #fff;
-}
-.check header a,
-.selectAdress header a,
-.add_address header a,
-.selectPayMethod header a,
-.people_number header a,
-.remark header a{
-	position: absolute;
-}
-.check header h3,
-.selectAdress header h3,
-.add_address header h3,
-.selectPayMethod header h3,
-.people_number header h3,
-.remark header h3{
-	font-size: 14px;
-    text-align: center;
-    font-weight: 400;
-    color: rgb(84, 84, 84);
-}
 .addressContainer,
 .check_row,
 .addAdress,
@@ -407,7 +335,7 @@ body{
 	margin-top: -22.5px;
 }
 .payment{
-	position: absolute;
+	position: fixed;
 	bottom: 0px;
 	left: 0px;
 	width: 100%;
@@ -598,6 +526,7 @@ body{
     line-height: 40px;
     border: 1px solid rgb(255, 100, 100);
     margin-right: 20px;
+	margin-bottom: 10px;
 	color: rgb(255, 100, 100);
 	border-radius: 3px;
 }
@@ -622,53 +551,9 @@ body{
 }
 /*用餐人数 end*/
 
-/*loading start*/
-.loading_box{
-	margin-top: 100px;
-	text-align: center;
-}
-.loading1,
-.loading2,
-.loading3{
-	display: inline-block;
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	background-color: rgba(255, 100, 100, 1);
-
-	-webkit-animation: bouncedelay 1.4s infinite ease-in-out;
-    animation: bouncedelay 1.4s infinite ease-in-out;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-}
-.loading1{
-	-webkit-animation-delay: -0.32s;
-	animation-delay: -0.32s;
-}
-.loading2{
-	-webkit-animation-delay: -0.16s;
-	animation-delay: -0.16s;
-}
-
-@-webkit-keyframes bouncedelay {
-  0%, 80%, 100% { -webkit-transform: scale(0.0) }
-  40% { -webkit-transform: scale(1.0) }
-}
- 
-@keyframes bouncedelay {
-  0%, 80%, 100% {
-    transform: scale(0.0);
-    -webkit-transform: scale(0.0);
-  } 40% {
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-  }
-}
-/*loading end*/
-
 /*口味偏好备注 start*/
-.remark{
-	display: block;
+.remark p{
+	padding-left: 12px;
 }
 .complete,
 .complete:active{
@@ -679,12 +564,31 @@ body{
 }
 .otherRemark{
 	padding: 10px 5px;
+	position: relative;
+}
+.otherRemark span{
+	position: absolute;
+    right: 12px;
+    bottom: 20px;
+    color: rgba(0, 0, 0, 0.5);
 }
 .otherRemark textarea{
 	padding: 3px;
 	color: rgba(92, 92, 92, 1);
 	margin-bottom: 0px;
 	height: 80px;
+}
+#check_remark {
+	position: relative;
+}
+#check_remark .remark_text{
+	position: absolute;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 82%;
+    right: 12px;
+    text-align: right;
 }
 .remark ul{
 	padding: 10px 12px;
@@ -706,3 +610,50 @@ body{
 	color: rgba(255, 255, 255, 1);
 }
 /*口味偏好备注 end*/
+
+/*确认支付 start*/
+.confirm_pay{
+	/*display: block;*/
+	background-color: rgba(0, 0, 0, 0.4);
+}
+.confirm_body{
+	width: 280px;
+	display: table;
+	margin: 0 auto;
+	margin-top: 25%;
+	background-color: rgba(255, 255, 255, 1);
+	padding: 20px 0px;
+	border-radius: 3px;
+	text-align: center;
+}
+.confirm_body h3{
+	text-align: center;
+    line-height: 40px;
+    color: rgba(135, 135, 135, 1);
+    font-weight: 400;
+}
+.confirm_body p{
+	text-align: center;
+	line-height: 60px;
+}
+.confirm_pay_btn{
+	width: 100%;
+	height: 40px;
+	padding: 0 10px;
+}
+.confirm_pay_btn a{
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(69, 192, 26, 1);
+	text-align: center;
+	color: rgba(255, 255, 255 ,1);
+	line-height: 40px;
+	border-radius: 3px;
+}
+.icon_success{
+	fill: rgba(69, 192, 26, 1);
+	width: 40px;
+    height: 60px;
+}
+/*确认支付 end*/

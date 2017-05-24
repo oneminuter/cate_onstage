@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>登录</title>
+	<link rel="stylesheet" href="css/loginAndRegister.css">
+</head>
+<body>
+	
+	<section class="main">
+		<!-- register start -->
+		<div class="content">
+			<h3>注册</h3>
+			<div class="login_row">
+				<label>手机号</label>
+				<input type="number" id="phone" onfocus="loginAndRegister.focus(this)" onblur="loginAndRegister.blur(this)">
+			</div>
+			<div class="login_row">
+				<label>密码</label>
+				<input type="password" id="password" onfocus="loginAndRegister.focus(this)" onblur="loginAndRegister.blur(this)">
+			</div>
+			<div class="login_row">
+				<label>确认密码</label>
+				<input type="password" id="confirmPassword" onfocus="loginAndRegister.focus(this)" onblur="loginAndRegister.blur(this)">
+			</div>
+			<a class="submit" href="javascript:loginAndRegister.register();">Register</a>
+			<a class="changePanel" href="javascript:javascript:loginAndRegister.changePanel('login');">已有账号，去登录</a>
+		</div>
+		<!-- register end -->
+		
+		<!-- login start -->
+		<div class="content">
+			<h3>登录</h3>
+			<div class="login_row">
+				<label>手机号</label>
+				<input type="number" id="phone" onfocus="loginAndRegister.focus(this)" onblur="loginAndRegister.blur(this)">
+			</div>
+			<div class="login_row">
+				<label>密码</label>
+				<input type="password" id="password" onfocus="loginAndRegister.focus(this)" onblur="loginAndRegister.blur(this)">
+			</div>
+			<a class="submit" href="javascript:loginAndRegister.login();">Login</a>
+			<a class="changePanel" href="javascript:javascript:loginAndRegister.changePanel('register');">没有账号，去注册</a>
+
+		</div>
+		<!-- login end -->
+	</section>
+	
+	<script src="js/mui.min.js"></script>
+	<script src="js/util.js"></script>
+	<script src="js/urlUtil.js"></script>
+	<script src="js/loginAndRegister.js"></script>
+</body>
+</html>
