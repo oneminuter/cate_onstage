@@ -14,11 +14,11 @@
 	<div class="mui-content">
 		<header>
 			<div class="user_icon">
-				<img src="img/shipu4.jpg" alt="">
+				<img src="img/user.svg" alt="">
 			</div>
 			<div class="user_info">
 				<p class="account">手机号</p>
-				<a href="javascript:;">详细信息 >></a>
+				<a href="javascript:;">退出</a>
 			</div>
 		</header>
 
@@ -31,7 +31,7 @@
 					</svg>
 					<span>余额</span>
 				</div>
-				<div class="item_r">￥56.0</div>
+				<div class="item_r" id="balance">￥0.0</div>
 			</div>
 
 			<div class="item_row" onclick="order.getOrderList()">
@@ -75,16 +75,6 @@
 					</svg>
 				</div>
 			</div>
-
-			<div class="item_row">
-				<div class="item_l">
-					<svg class="icon icon_integral" aria-hidden="true">
-						<use xlink:href="#icon-integral"></use>
-					</svg>
-					<span>我的收藏</span>
-				</div>
-				<div class="item_r">32</div>
-			</div>
 		</section>
 		<!-- main end -->
 
@@ -97,13 +87,13 @@
 				</svg>
 				<span class="mui-tab-label">首页</span>
 			</a>
-			<a class="mui-tab-item" href="#tabbar-with-chat">
+			<a class="mui-tab-item" href="recomment">
 				<svg class="icon icon_recommend" aria-hidden="true">
 					<use xlink:href="#icon-recommend"></use>
 				</svg>
 				<span class="mui-tab-label">推荐</span>
 			</a>
-			<a class="mui-tab-item" href="#tabbar-with-contact">
+			<a class="mui-tab-item" href="community">
 				<svg class="icon icon_community" aria-hidden="true">
 					<use xlink:href="#icon-community"></use>
 				</svg>

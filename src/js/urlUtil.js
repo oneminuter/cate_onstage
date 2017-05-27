@@ -31,9 +31,17 @@ var urlUtil = {
 		//获取订单列表
 		getOrderList: "/user/order/getOrderList",
 		// 注册
-		register: "/user/register",
+		register: "/user/doregister",
 		//登录
-		login: "/user/login"
+		login: "/user/dologin",
+		//获取用户信息
+		getUserInfo: "/user/getUserInfo",
+		//获取推荐列表
+		getRecommentList: "/recomment/getRecommentList",
+		//获取社区话题
+		getCommunityList: "/community/getCommunityList",
+		//获取话题详情
+		getTopicDetail: "/community/getTopicDetail"
 	},
 	
 	//根据操作名，返回需要请求的路径

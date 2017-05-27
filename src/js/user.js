@@ -1,3 +1,66 @@
+(function(){
+	var user = {
+		controller: function(){
+			user.init();
+			user.bind();
+		},
+
+		init: function(){
+			if(util.getSessionStorage("phone") != null){
+				mui(".account")[0].innerHTML = util.getSessionStorage("phone");
+				user.getUserInfo();
+			}else{
+				mui(".user_info a")[0].innerHTML = "登录";
+			}
+		},
+
+		bind: function(){
+			//详细信息-查看个人详细信息
+			mui(".user_info a")[0].addEventListener("tap", function(){
+				if(util.getSessionStorage("uid") != null){
+					util.clearSessionStorage();
+				}
+				window.location.href = "login";
+			}, false);
+
+		},
+
+		//获取余额
+		getUserInfo: function(){
+			var phone = util.getSessionStorage("phone");
+			if(phone == null){
+				mui("#balance")[0].innerHTML = "￥0.0";
+			}else{
+				mui.ajax(urlUtil.getRequestUrl("getUserInfo"),{
+					data:{
+						phone: phone
+					},
+					type: "post",
+					dataType: "json",
+					success: function(data){
+						if(data.header.success){
+							user.initUserPanel(data.body);
+						}else{
+							util.toast(data.header.errorInfo);
+						}
+					},
+					error: function(xhr, type, errorThrown){
+						util.toast(type + "错误，获取余额错误，请稍后重试");
+					}
+				});
+			}
+		},
+
+		initUserPanel: function(data){
+			mui(".user_icon img")[0].src = data.icon;
+			mui(".user_info a")[0].innerHTML = "退出";
+			mui("#balance")[0].innerHTML = "￥" + data.balance;
+		}
+
+	}
+	user.controller();
+})()
+
 // order start
 var order = {
 	getOrderList: function(){

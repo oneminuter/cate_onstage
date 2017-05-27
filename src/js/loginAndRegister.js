@@ -130,7 +130,7 @@ var loginAndRegister = {
 	focus: function(element){
 		if( typeof element.parentNode.querySelector("label") != "undefined" ){
 			element.parentNode.querySelector("label").style.cssText = 'margin-top: -32.5px;\
-																    background-color: rgb(15, 136, 235);\
+																    background-color: rgb(255, 100, 100);\
 																    color: rgb(255, 255, 255);\
 																    padding: 1px 9px;\
 																    border-radius: 10px;';
