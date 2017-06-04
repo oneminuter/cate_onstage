@@ -202,7 +202,7 @@
 				li.innerHTML = htmlTemplate;
 				li.addEventListener("tap", function(){
 					if(this.getAttribute("data-classify") != "meishi"){
-						console.log("教程");
+						detailFunc.getOtherDetail(this.id);
 					}else{
 						//获取详情
 						detailFunc.getDetail(this.id);
@@ -246,7 +246,7 @@ var detailFunc = {
 				}
 			},
 			error:function(xhr,type,errorThrown){
-				util.toast(type + "错误，获取食物列表，请稍后重试");
+				util.toast(type + "错误，获取食物详情错误，请稍后重试");
 			}
 		});
 	},
@@ -322,6 +322,46 @@ var detailFunc = {
 		}else{
 			checkFunc.getCheckInfo(id, number);
 		}
+	},
+
+	//获取食材、食谱、其他的详情
+	getOtherDetail: function(id){
+		mui(".o_detail")[0].style.display = "block";
+		mui(".main")[0].innerHTML = '<div class="loading_box">\
+										<i class="loading1"></i>\
+										<i class="loading2"></i>\
+										<i class="loading3"></i>\
+									</div>';
+		mui.ajax(urlUtil.getRequestUrl("getDetail"), {
+			data: {
+				id: id
+			},
+			dataType: "json",
+			type:"post",
+			success:function(data){
+				if(data.header.success){
+					detailFunc.renderOtherDetail(data.body);
+				}else{
+					util.toast(data.header.errorInfo);
+				}
+			},
+			error:function(xhr,type,errorThrown){
+				util.toast(type + "错误，获取食物详情错误，请稍后重试");
+			}
+		});
+	},
+
+	//渲染食材、食谱、其他的详情
+	renderOtherDetail: function(data){
+		mui(".main")[0].innerHTML = '<div class="head">\
+										<div class="o_thumbnail">\
+											<img src="' + data.imgUrl + '" alt="">\
+										</div>\
+										<h1>' + data.name + '</h1>\
+									</div>\
+									<div class="o_content">\
+										' + data.content + '\
+									</div>';
 	}
 } 
 //detailFunc end

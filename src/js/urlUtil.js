@@ -41,7 +41,9 @@ var urlUtil = {
 		//获取社区话题
 		getCommunityList: "/community/getCommunityList",
 		//获取话题详情
-		getTopicDetail: "/community/getTopicDetail"
+		getTopicDetail: "/community/getTopicDetail",
+		//发布话题
+		addTopic: "/community/addTopic"
 	},
 	
 	//根据操作名，返回需要请求的路径

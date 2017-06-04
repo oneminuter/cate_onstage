@@ -73,7 +73,8 @@
 /*发表按钮 end*/
 
 /*话题详情 start*/
-.topic_detail{
+.topic_detail,
+.publish_topic{
 	position: fixed;
 	width: 100%;
 	height: 100%;
@@ -83,12 +84,14 @@
 	z-index: 11;
 	display: none;
 }
-.topic_detail header{
+.topic_detail header,
+.publish_topic header{
 	height: 30px;
 	width: 100%;
 	padding:0px 12px;
 }
-.topic_detail header .icon{
+.topic_detail header .icon,
+.publish_topic header .icon{
 	fill: rgba(255, 100, 100, 1);
 	vertical-align: -9px;
 }
@@ -134,3 +137,93 @@
 	line-height: 1.6;
 }
 /*话题详情 end*/
+
+/*发布话题 start*/
+.publish_topic{
+	/*display: block;*/
+}
+.classify{
+	width: 100%;
+	display: table;
+	padding: 0px 12px;
+	position: relative;
+}
+.classify ul{
+	display: table;
+    margin: 0 auto;
+	margin-bottom: 15px;
+}
+.classify ul li{
+	display: inline-block;
+    width: 50px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    color: rgba(135, 135, 135, 1);
+    border: 1px solid rgba(135, 135, 135, 1);
+    font-size: 14px;
+    border-radius: 3px;
+    margin-right: 15px;
+}
+.classify ul li.selected{
+	background-color: rgba(255, 100, 100, 1);
+	color: rgba(255, 255, 255, 1);
+	border-color: rgba(255, 100, 100, 1);
+}
+.classify input{
+	margin-bottom: 0px;
+}
+.classify input,
+.publish_title input,
+.publish_content textarea{
+	font-size: 14px;
+	color: rgba(135, 135, 135, 1);
+}
+.publish_title{
+	height: 40px;
+}
+.publish_content{
+    height: 50%;
+}
+.publish_content textarea{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.publish_title,
+.publish_content{
+	position: relative;
+	width: 100%;
+    padding: 0px 12px;
+    margin-top: 20px;
+}
+.classify label,
+.publish_title label,
+.publish_content label{
+    position: absolute;
+    left: 50%;
+    margin-left: -22px;
+    margin-top: -10.5px;
+    font-size: 14px;
+    background-color: rgba(255, 100, 100, 1);
+    padding: 0px 8px;
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 1);
+}
+.classify label{
+	 margin-left: -36px;
+}
+.publish_btn{
+	display: block;
+	width: 60%;
+	height: 40px;
+	margin: 0 auto;
+	text-align: center;
+	line-height: 40px;
+	background-color: rgba(255, 100, 100, 1);
+	font-size: 16px;
+	color: rgba(255, 255, 255, 1);
+	border-radius: 3px;
+	margin-top: 20px;
+}
+/*发布话题 end*/

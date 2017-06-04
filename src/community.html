@@ -57,7 +57,7 @@
 		<!-- 文章列表 end -->
 
 		<!-- 发表按钮 start -->
-		<a class="publish" href="###">
+		<a class="publish" href="javascript:;">
 			<svg class="icon icon_publish" aria-hidden="true">
 				<use xlink:href="#icon-publish"></use>
 			</svg>
@@ -124,6 +124,37 @@
 		</div>
 	</section>
 	<!-- 话题详情 end -->
+
+	<!-- 发布话题 start -->
+	<section class="publish_topic">
+		<header>
+			<a class="float_left" href="javascript:publicFunc.hidden('publish_topic');">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#icon-close"></use>
+				</svg>
+			</a>
+		</header>
+		<div class="classify">
+			<ul>
+				<li class="selected">美食</li>
+				<li>食材</li>
+				<li>食谱</li>
+			</ul>
+			<label>其他分类</label>
+			<input type="text" value="美食">
+		</div>
+		<div class="publish_title">
+			<label>标题</label>
+			<input type="text">
+		</div>
+		<div class="publish_content">
+			<label>内容</label>
+			<textarea placeholder="说点什么吧..."></textarea>
+		</div>
+		<a class="publish_btn" href="javascript:;">发表</a>
+	</section>
+	<!-- 发布话题 end -->
+
 
 	<script src="js/mui.min.js"></script>
 	<script src="js/urlUtil.js" type="text/javascript" charset="utf-8"></script>
