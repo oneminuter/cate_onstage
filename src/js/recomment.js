@@ -56,7 +56,6 @@
 				li.innerHTML = htmlTemplate;
 				li.setAttribute("data-id", data[i].id);
 				li.addEventListener("tap", function(){
-					console.log("获取时");
 					page.getFoodContent(this.getAttribute("data-id"));
 				}, false);
 				mui(".recomment ul")[0].appendChild(li);
@@ -90,6 +89,8 @@
 											<i class="loading2"></i>\
 											<i class="loading3"></i>\
 										</div>';
+
+			mui(".detail header a#collect")[0].setAttribute("href" ,"javascript:collect.addCollect(" + id + ");");
 			publicFunc.show("detail");
 
 			mui.ajax(urlUtil.getRequestUrl("getDetail"), {
@@ -126,3 +127,32 @@
 	}
 	page.controller();
 })()
+
+var collect = {
+	addCollect: function(foodId){
+		var userId = util.getSessionStorage("uid");
+		if(userId == null){
+			util.toast("您还没有登录，登录之后就可以轻松收藏啦");
+			window.location.href = "user";
+			return false;
+		}
+		mui.ajax(urlUtil.getRequestUrl("addFoodCollect"), {
+			data: {
+				userId: userId,
+				foodId: foodId
+			},
+			type: "post",
+			dataType: "json",
+			success: function(data){
+				if(data.header.success){
+					util.toast("收藏成功，可以在个人中心查看收藏了");
+				}else{
+					util.toast(data.header.errorInfo);
+				}
+			},
+			error: function(xhr, type, errorThrown){
+				util.toast(type + "错误，收藏错误，请稍后重试");
+			}
+		});
+	}
+}

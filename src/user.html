@@ -48,21 +48,7 @@
 				</div>
 			</div>
 
-			<div class="item_row">
-				<div class="item_l">
-					<svg class="icon icon_myrecommend" aria-hidden="true">
-						<use xlink:href="#icon-recommend"></use>
-					</svg>
-					<span>我的推荐</span>
-				</div>
-				<div class="item_r">
-					<svg class="icon icon_right" aria-hidden="true">
-						<use xlink:href="#icon-right"></use>
-					</svg>
-				</div>
-			</div>
-
-			<div class="item_row">
+			<div class="item_row" onclick="collect.getCollectList()">
 				<div class="item_l">
 					<svg class="icon icon_collect" aria-hidden="true">
 						<use xlink:href="#icon-collect"></use>
@@ -75,6 +61,20 @@
 					</svg>
 				</div>
 			</div>
+
+			<!-- <div class="item_row">
+				<div class="item_l">
+					<svg class="icon icon_myrecommend" aria-hidden="true">
+						<use xlink:href="#icon-recommend"></use>
+					</svg>
+					<span>我的推荐</span>
+				</div>
+				<div class="item_r">
+					<svg class="icon icon_right" aria-hidden="true">
+						<use xlink:href="#icon-right"></use>
+					</svg>
+				</div>
+			</div> -->
 		</section>
 		<!-- main end -->
 
@@ -134,7 +134,29 @@
 		</ul>
 	</section>
 	<!-- order end -->
-	
+
+	<!-- my recomment start -->
+	<section class="collection">
+		<header>
+			<a href="javascript:publicFunc.hidden('collection');">
+				<svg class="icon icon_left" aria-hidden="true">
+					<use xlink:href="#icon-close"></use>
+				</svg>
+			</a>
+			<h3>我的收藏</h3>
+		</header>
+		<ul id="collectionList">
+			<li data-classify="classify" data-id="id">
+				<span class="classify">美食</span>
+				<div class="collect_introduce">
+					<h3>黄油吐司脆条</h3>
+					<!-- <p>黄油吐司脆条黄油吐司脆条黄油吐司脆条黄油吐司脆条黄油吐司脆条</p> -->
+				</div>
+			</li>
+		</ul>
+	</section>
+	<!-- my recomment end -->
+
 	<script src="js/mui.min.js"></script>
 	<script src="js/urlUtil.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/util.js" type="text/javascript" charset="utf-8"></script>

@@ -64,19 +64,20 @@
 // order start
 var order = {
 	getOrderList: function(){
+		var userId = util.getSessionStorage("uid");
+		if(userId == null){
+			util.toast("您还没有登录，请先登录");
+			return false;
+		}
 		publicFunc.show("order");
 		mui("#orderList")[0].innerHTML = '<div class="loading_box">\
 												<i class="loading1"></i>\
 												<i class="loading2"></i>\
 												<i class="loading3"></i>\
 											</div>';
-		var userId = util.getSessionStorage("uid");
-		if(userId == "undefined"){
-			console.log("请先登录");
-		}
 		mui.ajax(urlUtil.getRequestUrl("getOrderList"),{
 			data: {
-				userId: 0
+				userId: userId
 			},
 			type: "post",
 			dataType: "json",
@@ -84,6 +85,10 @@ var order = {
 				if(data.header.success){
 					order.renderOrderList(data.body);
 				}else{
+					mui("#orderList")[0].style.cssText = 'text-align: center;\
+													    font-size: 14px;\
+													    color: rgba(135, 135, 135, 1);';
+					mui("#orderList")[0].innerHTML = "您还没有订单~";
 					util.toast(data.header.errorInfo);
 				}
 			},
@@ -134,3 +139,73 @@ var order = {
 	}
 }
 // order end
+
+// collect start
+var collect = {
+	getCollectList: function(){
+		var userId = util.getSessionStorage("uid");
+		if(userId == null){
+			util.toast("您还没有登录，请先登录");
+			return false;
+		}
+		mui("#collectionList")[0].innerHTML = '<div class="loading_box">\
+												<i class="loading1"></i>\
+												<i class="loading2"></i>\
+												<i class="loading3"></i>\
+											</div>';
+		publicFunc.show("collection");
+
+		mui.ajax(urlUtil.getRequestUrl("getCollectionList"), {
+			data: {
+				userId: userId
+			},
+			type: "post",
+			dataType: "json",
+			success: function(data){
+				if(data.header.success){
+					collect.renderCollectionList(data.body);
+				}else{
+					util.toast(data.header.errorInfo);
+				}
+			},
+			error: function(xhr, type, errorThrown){
+				util.toast(type + "错误，获取我的收藏列表错误，请稍后重试");
+			}
+		});
+	},
+
+	renderCollectionList: function(data){
+		mui("#collectionList")[0].innerHTML = '';
+		for(var i = 0; i < data.length; i++){
+			var li  = document.createElement("li");
+			li.setAttribute("data-classify",data[i].classify);
+			li.setAttribute("data-id", data[i].id);
+			var htmlTemplate = '<span class="classify">' + collect.getCollectClassify(data[i].classify) + '</span>\
+								<div class="collect_introduce">\
+									<h3>' + data[i].title + '</h3>\
+								</div>';
+			li.innerHTML = htmlTemplate;
+			mui("#collectionList")[0].appendChild(li);
+		}
+	},
+
+	//收藏类型转换
+	getCollectClassify: function(classify){
+		var result = "";
+		switch(classify){
+			case "food":
+				result = "美食";
+				break;
+			case "community":
+				result = "话题";
+				break;
+			case "recomment":
+				result = "推荐";
+				break;
+			default :
+				result = "其他";
+				break;
+		}
+		return result;
+	}
+}

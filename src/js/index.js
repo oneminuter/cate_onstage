@@ -146,7 +146,7 @@
 		//获取分类列表
 		getFoodList: function(classify){
 			classify = classify || "meishi";
-			mui.ajax(urlUtil.getRequestUrl("getFoodList"), {
+			mui.ajax(urlUtil.getRequestUrl("getFoodListByClassify"), {
 				data: {
 					classify: classify
 				},
@@ -311,7 +311,8 @@ var detailFunc = {
 	//加入购物车 / 去结算
 	addTocart: function(id){
 		if( util.getSessionStorage("uid") == null){
-			window.location.href = "login";
+			util.toast("您还没有登录，请先登录");
+			window.location.href = "user";
 			return false;
 		}
 
@@ -368,7 +369,7 @@ var detailFunc = {
 
 // checkFunc start
 var checkFunc = {
-	getCheckInfo: function(id, number){
+	getCheckInfo: function(foodId, number){
 		mui(".check")[0].style.display = "block";
 		mui(".check")[0].innerHTML = '<header>\
 											<a href="javascript:publicFunc.hidden(\'check\');" class="closeCheckPannel">\
@@ -385,7 +386,8 @@ var checkFunc = {
 										</div>';
 		mui.ajax(urlUtil.getRequestUrl("getCheckInfo"), {
 			data: {
-				id: id,
+				userId: util.getSessionStorage("uid"),
+				foodId: foodId,
 				number: number
 			},
 			type: "post",

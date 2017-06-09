@@ -14,8 +14,8 @@ var urlUtil = {
 		addFoodSubmit: "/admin/food/addFoodSubmit",
 		//添加食材、食谱、其他品类
 		addFoodShicaiOrShipuOrOtherSubmit: "/admin/food/addFoodShicaiOrShipuOrOtherSubmit",
-		//获取美食列表
-		getFoodList: "/index/food/getFoodList",
+		//按分类获取美食列表
+		getFoodListByClassify: "/index/food/getFoodListByClassify",
 		//获取详情
 		getDetail: "/index/food/getDetail",
 		//获取订单详情
@@ -43,7 +43,29 @@ var urlUtil = {
 		//获取话题详情
 		getTopicDetail: "/community/getTopicDetail",
 		//发布话题
-		addTopic: "/community/addTopic"
+		addTopic: "/community/addTopic",
+		//添加评论
+		addComment: "/community/detail/addComment",
+		//获取话题的评论列表
+		getTopicCommentList: "/community/getTopicCommentList",
+		//收藏推荐食物
+		addFoodCollect: "/recomment/addCollect",
+		//收藏话题
+		addTopicCollect: "/community/addTopicCollect",
+		//获取我的收藏列表
+		getCollectionList: "/user/getCollectionList",
+		//获取幻灯banner列表
+		getSlideList: "/admin/slide/getSlideList",
+		//修改banner的链接地址
+		editBannerLinkUrl: "/admin/slide/editUrlLink",
+		//删除banner
+		deleteBanner: "/admin/slide/delete",
+		//删除美食
+		deleteFood: "/admin/food/deleteFood",
+		//修改美食信息
+		modifyFoodInfo: "/admin/food/modifyFoodInfo",
+		//获取食物列表
+		getAllFoodList: "/admin/food/getAllFoodList"
 	},
 	
 	//根据操作名，返回需要请求的路径

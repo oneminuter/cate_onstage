@@ -19,6 +19,6 @@ var publicFunc = {
 				}
 			}, false);
 		}
-	}
+	},
 }
 publicFunc.bind();

@@ -23,6 +23,7 @@
 				<dd>
 					<ul id="slidePannel">
 						<li id="addSlide">添加banner</li>
+						<li id="slideList">banner列表</li>
 					</ul>
 				</dd>
 			</dl>
@@ -31,6 +32,7 @@
 				<dd>
 					<ul id="foodPannel">
 						<li id="addFood">添加美食</li>
+						<li id="foodList">美食列表</li>
 					</ul>
 				</dd>
 			</dl>
@@ -53,6 +55,37 @@
 				<a href="javascript:;" id="addSlideBtn" class="btn">提交</a>
 			</div>
 			<!-- addSlide end -->
+
+			<!-- slide list start -->
+			<div class="slideList">
+				<table>
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>banner图</th>
+							<th>链接地址</th>
+							<th>上架时间</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>
+								<img src="/cateUploadFile/2017/05/15\14948634470487.jpeg" alt="">
+							</td>
+							<td>
+								<input onchange="slide.editLinkUrl(this, id)" class="urlLink" type="text" value="test.html">
+							</td>
+							<td>2017-05-15 23:51:19</td>
+							<td>
+								<a class="btn_type_2" href="javascript:slide.deleteBanner(id);">删除</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- slide list end -->
 
 		</div>
 		<!-- slidePannel end -->
@@ -156,13 +189,85 @@
 					<a href="javascript:;" id="addOtherSubmitBtn" class="btn">提交</a>
 				</section>
 				<!-- addOther end -->
-					
 			</div>
 			<!-- addFood end -->
+
+			<!-- foodList start -->
+			<div class="foodList">
+				<table>
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>分类</th>
+							<th>食物名</th>
+							<th>图片</th>
+							<th>价格(元)</th>
+							<th>优惠满足价</th>
+							<th>优惠价</th>
+							<th>其他优惠说明</th>
+							<th>省市区</th>
+							<th>详细地址</th>
+							<th>店名</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>美食</td>
+							<td>
+								<input onchange="food.modify(id, 'name')" type="text" value="重庆鸡公煲">
+							</td>
+							<td>
+								<img class="foodImg" src="/cateUploadFile/2017/05/02\14937132318054.jpeg" alt="">
+							</td>
+							<td>
+								<input onchange="food.modify(id, 'price')" type="text" value="25">
+							</td>
+							<td>
+								<input onchange="food.modify(id, 'reachPrice')" type="text" value="35">
+							</td>
+							<td>
+								<input onchange="food.modify(id, 'favorablePrice')" type="text" value="30">
+							</td>
+							<td>
+								<input onchange="food.modify(id, 'otherFavorable')" type="text" value="其他优惠活动说明">
+							</td>
+							<td>
+								<input onchange="food.modify(id, 'address')" type="text" value="贵州平塘">
+							</td>
+							<td>
+								<input onchange="food.modify(id, 'detailAddress')" type="text" value="步行街">
+							</td>
+							<td>
+								<input onchange="food.modify(id, 'storeName')" type="text" value="兵哥哥鸡公煲">
+							</td>
+							<td>
+								<a class="btn_type_2" href="javascript:food.deleteFood(id);">删除</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- foodList end -->
 		</div>
 		<!-- foodPannel end -->
+
 	</section>
 	<!-- content_container end -->
+
+	<!-- 删除确认框 start -->
+	<!-- 
+	<div class="confirm">
+		<div class="confirm_body">
+			<h1>是否删除？</h1>
+			<div class="comfirm_btn">
+				<a class="btn_type_1" href="javascript:pulicFunc.sure();">确定</a>
+				<a class="btn_type_1" href="javascript:pulicFunc.cancel(this);">取消</a>
+			</div>
+		</div>
+	</div> -->
+	<!-- 删除确认框 end -->
 
 	<script src="js/urlUtil.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/util.js" type="text/javascript" charset="utf-8"></script>

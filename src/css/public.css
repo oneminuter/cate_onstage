@@ -49,7 +49,8 @@ body{
 .selectPayMethod header,
 .people_number header,
 .remark header,
-.order header{
+.order header,
+.collection header{
 	width: 100%;
 	display: table;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -65,7 +66,8 @@ body{
 .selectPayMethod header a,
 .people_number header a,
 .remark header a,
-.order header a{
+.order header a,
+.collection header a{
 	position: absolute;
 }
 .check header h3,
@@ -74,7 +76,8 @@ body{
 .selectPayMethod header h3,
 .people_number header h3,
 .remark header h3,
-.order header h3{
+.order header h3,
+.collection header h3{
 	font-size: 14px;
     text-align: center;
     font-weight: 400;

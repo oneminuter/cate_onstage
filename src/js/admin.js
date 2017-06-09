@@ -1,3 +1,7 @@
+/*
+	依赖jquery的ajax,
+	jquery.area.js
+*/
 (function () {
 
 	var page = {
@@ -301,8 +305,8 @@
 			for(var j = 0; j < pannels.length; j++){
 				if(pannels[j].className == parentNodeId){
 					pannels[j].style.display = "block";
-					var childClassName = "." + thisId;
-					pannels[j].querySelector(childClassName).style.display = "block";
+					page.changeChildPanel(thisId, pannels[j].className);
+					break;
 				}
 			}
 		},
@@ -331,8 +335,282 @@
 					break;
 			}
 
+		},
+
+		//切换子菜单对应的面板
+		changeChildPanel: function(childClassName, parentClassName){
+			var child_panels = document.querySelectorAll("." + parentClassName + " > div");
+			child_panels.forEach(function(val, index, arr){
+				val.style.display = "none";
+			});
+
+			child_panels.forEach(function(val, index, arr){
+				if(val.className == childClassName){
+					val.style.display = "block";
+					page.initData(childClassName);
+				}
+			});
+		},
+
+		//数据列表请求初始化
+		initData: function(className){
+			switch(className){
+				case "slideList":
+					slide.getSlideList();
+					break;
+				case "foodList":
+					food.getFoodList();
+					break;
+				default: break;
+			}
 		}
-		
 	}
 	page.controller();
 })()
+
+var slide = {
+	getSlideList: function(){
+		$.ajax({
+			url: urlUtil.getRequestUrl("getSlideList"),
+			type: "post",
+			dataType: "json",
+			success: function(data){
+				if(data.header.success){
+					slide.renderSlideList(data.body);
+				}else{
+					util.toast(data.header.errorInfo);
+				}
+			},
+			error: function(error){
+				util.toast(error);
+			}
+		});
+	},
+
+	renderSlideList: function(data){
+		var html = "";
+		data.forEach(function(val, index, arr){
+			var htmlTemplate = '<tr>\
+									<td>' + val.id + '</td>\
+									<td>\
+										<img src="' + val.imgUrl + '" alt="">\
+									</td>\
+									<td>\
+										<input onchange="slide.editLinkUrl(this, ' + val.id + ')" class="urlLink" type="text" value="' + val.linkUrl + '">\
+									</td>\
+									<td>' + val.onShelveTime + '</td>\
+									<td>\
+										<a class="btn_type_2" href="javascript:slide.deleteBanner(' + val.id + ');">删除</a>\
+									</td>\
+								</tr>';
+			html += htmlTemplate;
+		});
+		document.querySelector(".slideList table tbody").innerHTML = html;
+	},
+
+	//修改链接地址
+	editLinkUrl: function(ele, id){
+		var url = ele.value.trim();
+		$.ajax({
+			url: urlUtil.getRequestUrl("editBannerLinkUrl"),
+			data: {
+				a: url,
+				id: id
+			},
+			type:"post",
+			dataType: "json",
+			success: function(data){
+				if(data.header.success){
+					slide.getSlideList();
+				}else{
+					util.toast(data.header.errorInfo);
+				}
+			},
+			error: function(error){
+				util.toast(error);
+			}
+		});
+	},
+
+	deleteBanner: function(id, isSure){
+		isSure = isSure || false;
+		if(isSure != true){
+			publicFunc.confirm(id, this.deleteBanner);
+		}else{
+			$.ajax({
+				url: urlUtil.getRequestUrl("deleteBanner"),
+				data: {
+					id: id
+				},
+				type: "post",
+				dataType: "json",
+				success: function(data){
+					if(data.header.success){
+						slide.getSlideList();
+					}else{
+						util.toast(data.header.errorInfo);
+					}
+				},
+				error: function(error){
+					util.toast(error);
+				}
+			});
+		}
+	},
+}
+
+var food = {
+	getFoodList: function(){
+		$.ajax({
+			url: urlUtil.getRequestUrl("getAllFoodList"),
+			type: "post",
+			dataType: "json",
+			success: function(data){
+				if(data.header.success){
+					food.renderFoodList(data.body);
+				}else{
+					util.toast(data.header.errorInfo);
+				}
+			},
+			error: function(error){
+				util.toast(error);
+			}
+		});
+	},
+
+	renderFoodList: function(data){
+		var html = "";
+		data.forEach(function(val, index, arr){
+			var htmlTemplate = '<tr>\
+							<td>' + val.id + '</td>\
+							<td>' + food.getClassify(val.classify) + '</td>\
+							<td>\
+								<input onchange="food.modify(' + val.id + ', \'name\', this)" type="text" value="' + val.name + '">\
+							</td>\
+							<td>\
+								<img class="foodImg" src="' + val.imgUrl + '" alt="">\
+							</td>\
+							<td>\
+								<input onchange="food.modify(' + val.id + ', \'price\', this)" type="text" value="' + val.price + '">\
+							</td>\
+							<td>\
+								<input onchange="food.modify(' + val.id + ', \'reachPrice\', this)" type="text" value="' + val.reachPrice + '">\
+							</td>\
+							<td>\
+								<input onchange="food.modify(' + val.id + ', \'favorablePrice\', this)" type="text" value="' + val.favorablePrice + '">\
+							</td>\
+							<td>\
+								<input onchange="food.modify(' + val.id + ', \'otherFavorable\', this)" type="text" value="' + val.otherFavorable + '">\
+							</td>\
+							<td>\
+								<input onchange="food.modify(' + val.id + ', \'address\', this)" type="text" value="' + val.address + '">\
+							</td>\
+							<td>\
+								<input onchange="food.modify(' + val.id + ', \'detailAddress\', this)" type="text" value="' + val.detailAddress + '">\
+							</td>\
+							<td>\
+								<input onchange="food.modify(' + val.id + ', \'storeName\', this)" type="text" value="' + val.storeName + '">\
+							</td>\
+							<td>\
+								<a class="btn_type_2" href="javascript:food.deleteFood(' + val.id + ');">删除</a>\
+							</td>\
+						</tr>';
+			html += htmlTemplate;
+		});
+		document.querySelector(".foodList table tbody").innerHTML = html;
+	},
+
+	//修改食物信息
+	modify: function(id, key, ele){
+		$.ajax({
+			url: urlUtil.getRequestUrl("modifyFoodInfo"),
+			data: {
+				id: id,
+				key: key,
+				val: ele.value
+			},
+			type: "post",
+			dataType: "json",
+			success: function(data){
+				if(data.header.success){
+					food.getFoodList();
+				}else{
+					util.toast(data.header.errorInfo);
+				}
+			},
+			error: function(error){
+				util.toast(error);
+			}
+		});
+	},
+
+	//食物分类转换
+	getClassify: function(classify){
+		var result = "";
+		switch(classify){
+			case "meishi":
+				result = "美食";
+				break;
+			case "shicai":
+				result = "食材";
+				break;
+			case "shipu":
+				result = "食谱";
+				break;
+			default :
+				result = "其他";
+				break;
+		}
+		return result;
+	},
+
+	deleteFood: function(id, isSure){
+		isSure = isSure || false;
+		if(isSure != true){
+			publicFunc.confirm(id, this.deleteFood);
+		}else{
+			$.ajax({
+				url: urlUtil.getRequestUrl("deleteFood"),
+				data:{
+					id: id
+				},
+				type: "post",
+				dataType: "json",
+				success: function(data){
+					if(data.header.success){
+						food.getFoodList();
+					}else{
+						util.toast(data.header.errorInfo);
+					}
+				},
+				error: function(error){
+					url.toast(error);
+				}
+			});
+		}
+	}
+}
+
+var publicFunc = {
+	confirm: function(id, func){
+		var div = document.createElement("div");
+		div.className = "confirm";
+		div.innerHTML = '<div class="confirm_body">\
+							<h1>是否删除？</h1>\
+							<div class="comfirm_btn">\
+								<a class="btn_type_1" href="javascript:publicFunc.sure(' + id + ');">确定</a>\
+								<a class="btn_type_1" href="javascript:publicFunc.cancel();">取消</a>\
+							</div>\
+						</div>';
+		publicFunc.confirmPanel = div;
+		publicFunc.callback = func;
+		document.body.appendChild(div);
+	},
+	sure: function(id){
+		publicFunc.callback(id, true);
+		publicFunc.cancel();
+	},
+	cancel: function(){
+		document.body.removeChild(publicFunc.confirmPanel);
+	}
+}

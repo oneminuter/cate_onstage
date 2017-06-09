@@ -103,7 +103,7 @@
 					<use xlink:href="#icon-close"></use>
 				</svg>
 			</a>
-			<a class="float_right" href="javascript:;">
+			<a id="collection_topic" class="float_right" href="javascript:topic.addCollection(topicId);">
 				<svg class="icon" aria-hidden="true">
 					<use xlink:href="#icon-collect"></use>
 				</svg>
@@ -121,6 +121,29 @@
 				你因为贪吃付出过怎样惨痛的代价
 				你因为贪吃付出过怎样惨痛的代价
 			</div>
+
+			<!-- 评论 start -->
+			<div class="comment">
+				<div class="input_container">
+					<textarea onfocus="comment.checkLogin()" placeholder="评论、留言，说点什么吧..."></textarea>
+					<a href="javascript:comment.addComment(0);">发表评论</a>
+				</div>
+				<div class="comment_list">
+					<ul>
+						<li>
+							<div class="user_icon">
+								<img src="img/user.svg" alt="">
+							</div>
+							<h4>小林</h4>
+							<p>
+								美美的早餐美美的早餐美美的早餐美美的早餐美美的早餐美美的早餐美美的早餐美美的早餐美美的早餐美美的早餐美美的早餐美美的早餐
+							</p>
+							<span>2107-06-06 15:57</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- 评论 end -->
 		</div>
 	</section>
 	<!-- 话题详情 end -->
