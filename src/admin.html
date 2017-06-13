@@ -36,6 +36,30 @@
 					</ul>
 				</dd>
 			</dl>
+			<dl>
+				<dt>社区管理</dt>
+				<dd>
+					<ul id="topicPanel">
+						<li id="topicList">话题列表</li>
+					</ul>
+				</dd>
+			</dl>
+			<dl>
+				<dt>订单管理</dt>
+				<dd>
+					<ul id="orderPanel">
+						<li id="orderList">订单列表</li>
+					</ul>
+				</dd>
+			</dl>
+			<dl>
+				<dt>用户管理</dt>
+				<dd>
+					<ul id="userPanel">
+						<li id="userList">用户列表</li>
+					</ul>
+				</dd>
+			</dl>
 		</div>
 		<!-- menu end -->
 
@@ -86,7 +110,6 @@
 				</table>
 			</div>
 			<!-- slide list end -->
-
 		</div>
 		<!-- slidePannel end -->
 
@@ -253,21 +276,190 @@
 		</div>
 		<!-- foodPannel end -->
 
+		<!-- topicPanel start -->
+		<div class="topicPanel">
+			<!-- topicList start -->
+			<div class="topicList">
+				<table>
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>标题</th>
+							<th>分类</th>
+							<th>内容</th>
+							<th>发布人</th>
+							<th>发布日期</th>
+							<th>浏览量</th>
+							<th>评论数</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>有哪些不为人知的适合油炸的东西？</td>
+							<td>美食</td>
+							<td>有哪些不为人知的适合油炸的东西？有哪些不为人知的适合油炸的东西？</td>
+							<td>小林</td>
+							<td>2017-06-11 14:44:34</td>
+							<td>20</td>
+							<td>39</td>
+							<td>
+								<a class="btn_type_2" href="javascript:topic.deleteTopic(id);">删除</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- topicList end -->
+		</div>
+		<!-- topicPannel end -->
+
+		<!-- orderPanel start -->
+		<div class="orderPanel">
+			<div class="orderList">
+				<table>
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>订单号</th>
+							<th>下单手机号</th>
+							<th>食物名</th>
+							<th>花费（元）</th>
+							<th>下单时间</th>
+							<th>支付方式</th>
+							<th>订单状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>001</td>
+							<td>13546712752</td>
+							<td>重庆鸡公煲</td>
+							<td>28.5</td>
+							<td>2017-06-11 16:09:38</td>
+							<td>微信支付</td>
+							<td>已支付</td>
+							<td>
+								<a class="btn_type_1" href="javascript:order.modifyState(id);">修改订单状态</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- orderPanel end -->
+
+		<!-- userPanel start -->
+		<div class="userPanel">
+			<!-- userList start -->
+			<div class="userList">
+				<table>
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>用户名</th>
+							<th>头像</th>
+							<th>电话</th>
+							<th>性别</th>
+							<th>角色</th>
+							<th>余额</th>
+							<th>代金券</th>
+							<th>积分</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>
+								<input onchange="user.showSaveBtn(1, this, 'username')" type="text" value="小林">
+							</td>
+							<td>
+								<img src="img/user.svg" alt="">
+							</td>
+							<td>
+								<input onchange="user.showSaveBtn(1, this, 'phone')" type="number" value="13546712752">
+							</td>
+							<td>
+								<select onchange="user.showSaveBtn(1, this, 'gender')">
+									<option value="1" selected="true">男</option>
+									<option value="0">女</option>
+								</select>
+							</td>
+							<td>
+								<select onchange="user.showSaveBtn(1, this, 'isAdmin')">
+									<option value="0">普通成员</option>
+									<option value="1">管理员</option>
+								</select>
+							</td>
+							<td>
+								<input onchange="user.showSaveBtn(1, this, 'balance')" type="number" value="54">
+							</td>
+							<td>
+								<input onchange="user.showSaveBtn(1, this, 'cash')" type="number" value="5">
+							</td>
+							<td>
+								<input onchange="user.showSaveBtn(1, this, 'integral')" type="number" value="126">
+							</td>
+							<td>
+								<a class="save_btn btn_type_3" href="javascript:user.saveEdit(1);">保存</a>
+								<div class="changePhoto">
+									<input type="file" accept="image/png,image/jpg,image/jpeg" onchange="user.changePhoto(1, this)">
+									<a class="btn_type_1" href="javascript:;">修改头像</a>
+								</div>
+								<a class="btn_type_2" href="javascript:user.deleteUser(1);">删除</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- userList end -->
+		</div>
+		<!-- userPanel end -->
+
 	</section>
 	<!-- content_container end -->
 
 	<!-- 删除确认框 start -->
 	<!-- 
-	<div class="confirm">
+	<div class="popup">
 		<div class="confirm_body">
 			<h1>是否删除？</h1>
 			<div class="comfirm_btn">
-				<a class="btn_type_1" href="javascript:pulicFunc.sure();">确定</a>
-				<a class="btn_type_1" href="javascript:pulicFunc.cancel(this);">取消</a>
+				<a class="btn_type_1" href="javascript:publicFunc.sure(id);">确定</a>
+				<a class="btn_type_1" href="javascript:publicFunc.cancel(this);">取消</a>
 			</div>
 		</div>
 	</div> -->
 	<!-- 删除确认框 end -->
+
+	<!-- 修改订单状态 start -->
+	<!-- 
+	<div class="popup">
+		<div class="stateBody">
+			<h1>修改订单状态</h1>
+			<label>
+				<input onchange="order.selectState(1)" type="radio" name="orderState" value="1">
+				已支付
+			</label>
+			<label>
+				<input onchange="order.selectState(0)" type="radio" name="orderState">
+				未支付
+			</label>
+			<label>
+				<input onchange="order.selectState(-1)" type="radio" name="orderState">
+				取消订单
+			</label>
+			<div class="btn_container">
+				<a class="btn_type_1" href="javascript:publicFunc.sure(id);">确定</a>
+				<a class="btn_type_1" href="javascript:javascript:publicFunc.cancel(this);">取消</a>
+			</div>
+		</div>
+	</div> -->
+	<!-- 修改订单状态 end -->
 
 	<script src="js/urlUtil.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/util.js" type="text/javascript" charset="utf-8"></script>

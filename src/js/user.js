@@ -52,6 +52,9 @@
 		},
 
 		initUserPanel: function(data){
+			if(data.username != null){
+				mui(".account")[0].innerHTML = data.username;
+			}
 			mui(".user_icon img")[0].src = data.icon;
 			mui(".user_info a")[0].innerHTML = "退出";
 			mui("#balance")[0].innerHTML = "￥" + data.balance;

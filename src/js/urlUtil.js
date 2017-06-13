@@ -65,7 +65,21 @@ var urlUtil = {
 		//修改美食信息
 		modifyFoodInfo: "/admin/food/modifyFoodInfo",
 		//获取食物列表
-		getAllFoodList: "/admin/food/getAllFoodList"
+		getAllFoodList: "/admin/food/getAllFoodList",
+		//删除话题
+		deleteTopic: "/admin/community/deleteTopic",
+		//获取所有订单列表
+		getAllOrderList: "/admin/order/getAllOrderList",
+		//修改订单状态
+		modifyOrderState: "/admin/order/modifyOrderState",
+		//获取用户信息列表
+		getUserList: "/admin/user/getUserList",
+		//保存修改的用户信息
+		saveEditUserInfo: "/admin/user/saveEditUserInfo",
+		//删除用户
+		deleteUser: "/admin/user/deleteUser",
+		//上传头像
+		uploadUserIcon: "/admin/user/uploadUserIcon"
 	},
 	
 	//根据操作名，返回需要请求的路径
