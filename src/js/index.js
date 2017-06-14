@@ -327,12 +327,14 @@ var detailFunc = {
 
 	//获取食材、食谱、其他的详情
 	getOtherDetail: function(id){
-		mui(".o_detail")[0].style.display = "block";
 		mui(".main")[0].innerHTML = '<div class="loading_box">\
 										<i class="loading1"></i>\
 										<i class="loading2"></i>\
 										<i class="loading3"></i>\
 									</div>';
+
+		
+		mui(".o_detail")[0].style.display = "block";									
 		mui.ajax(urlUtil.getRequestUrl("getDetail"), {
 			data: {
 				id: id
@@ -354,6 +356,7 @@ var detailFunc = {
 
 	//渲染食材、食谱、其他的详情
 	renderOtherDetail: function(data){
+		mui(".o_detail header a#collect")[0].href = 'javascript:detailFunc.addCollect(' + data.id + ');';
 		mui(".main")[0].innerHTML = '<div class="head">\
 										<div class="o_thumbnail">\
 											<img src="' + data.imgUrl + '" alt="">\
@@ -363,6 +366,34 @@ var detailFunc = {
 									<div class="o_content">\
 										' + data.content + '\
 									</div>';
+	},
+
+	//加入收藏
+	addCollect: function(foodId){
+		var userId = util.getSessionStorage("uid");
+		if(userId == null){
+			util.toast("您还没有登录，登录之后就可以轻松收藏啦");
+			window.location.href = "user";
+			return false;
+		}
+		mui.ajax(urlUtil.getRequestUrl("addFoodCollect"), {
+			data: {
+				userId: userId,
+				foodId: foodId
+			},
+			type: "post",
+			dataType: "json",
+			success: function(data){
+				if(data.header.success){
+					util.toast("收藏成功，可以在个人中心查看收藏了");
+				}else{
+					util.toast(data.header.errorInfo);
+				}
+			},
+			error: function(xhr, type, errorThrown){
+				util.toast(type + "错误，收藏错误，请稍后重试");
+			}
+		});
 	}
 } 
 //detailFunc end
